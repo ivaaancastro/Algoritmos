@@ -95,50 +95,38 @@ void test2() {
 
 void tablaTiempos(int (*func)(int[], int), const char* nombreFunc) {
     int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
-    int num_t = sizeof(t) / sizeof(t[0]);
-    int j, k = 1000, n, i;
-    double inicio, fin, tiempo1, tiempo2, tiempo, relacion, relacion2, relacion3;
+    int k = 1000, n;
+    double inicio, fin, tiempo, relacion;
 
     printf("\nTiempos de ejecución (%s)\n\n", nombreFunc);
     printf("%16s%15s%15s%15s%15s\n", "Tamaño", "n", "(t(n)/n^1.8)", "(t(n)/n^2)", "(t(n)/n^2.2)");
 
-    for (i = 0; i < num_t; i++) {
+    for (int i = 0; i < 7; i++) {
         n = t[i];
         int v[n];
         aleatorio(v, n);
         inicio = microsegundos();
-        func(v, n); // Llamamos a la función pasada como argumento
+        func(v, n);
         fin = microsegundos();
         tiempo = fin - inicio;
-        relacion = tiempo / pow(n, 1.8); // Calculamos la relación t(n)/n^1.8
-        relacion2 = tiempo / pow(n, 2.0); // Calculamos la relación t(n)/n^2
-        relacion3 = tiempo / pow(n, 2.2); // Calculamos la relación t(n)/n^2.2
+        relacion = tiempo / pow(n, 1.8);
 
         if (tiempo < 500) {
-            j = 0;
-            inicio = microsegundos();
-            while (j < k) {
+            if(nombreFunc == "sumaSubMax1")
+            printf("(*)");
+            double tiempoPromedio = 0.0;
+            for (int j = 0; j < k; j++) {
                 aleatorio(v, n);
-                func(v, n); // Llamamos a la función pasada como argumento
-                j++;
+                inicio = microsegundos();
+                func(v, n);
+                fin = microsegundos();
+                tiempoPromedio += fin - inicio;
             }
-            fin = microsegundos();
-            tiempo1 = fin - inicio;
-            j = 0;
-            inicio = microsegundos();
-            while (j < k) {
-                aleatorio(v, n);
-                j++;
-            }
-            fin = microsegundos();
-            tiempo2 = fin - inicio;
-            tiempo = (tiempo1 - tiempo2) / k;
-            relacion = tiempo / pow(n, 1.8);
-            relacion2 = tiempo / pow(n, 2.0);
-            relacion3 = tiempo / pow(n, 2.2);
+            tiempoPromedio /= k;
+            tiempo = tiempoPromedio;
+            relacion = tiempoPromedio / pow(n, 1.8);
         }
-
-        printf("%15d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, relacion, relacion2, relacion3);
+        printf("%15d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, relacion, relacion / pow(n, 2.0), relacion / pow(n, 2.2));
     }
 }
 
