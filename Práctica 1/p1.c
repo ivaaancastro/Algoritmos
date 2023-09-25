@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
+
 int sumaSubMax1(int v[], int n) {
 	int i, j;
 	int estaSuma, sumaMax = 0;
@@ -28,6 +29,14 @@ int sumaSubMax2(int v[], int n) {
             estaSuma = 0;
 	}
     return sumaMax;
+}
+
+
+double microsegundos() { /* obtiene la hora del sistema en microsegundos */
+struct timeval t;
+if (gettimeofday(&t, NULL) < 0 )
+return 0.0;
+return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
 void inicializar_semilla() {
@@ -75,7 +84,7 @@ void test2() {
 	printf("test\n");
 	printf("%33s%15s%15s\n", "", "sumaSubMax1", "sumaSubMax2");
 	for (i=0; i<10; i++) {
-		aleatorio(v, 9);
+		aleatorio(v, 500);
 		listar_vector(v, 9);
 		a = sumaSubMax1(v, 9);
 		b = sumaSubMax2(v, 9);
@@ -85,9 +94,35 @@ void test2() {
 
 int main() {
 	inicializar_semilla();
+
+	int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
+	int num_t = sizeof(t) / sizeof(t[0]);
+
+	printf("Tiempos de ejecución \n\n");
+	printf("%15s%15s%15s\n", "Tamaño", "Tiempo1", "Tiempo2");
+
+	for (int i = 0; i < num_t; i++)
+	{
+		int n = t[i];
+		int v[n];
+
+		aleatorio(v, n);
+
+		double inicio1 = microsegundos();
+		sumaSubMax1(v, n);
+		double fin1 = microsegundos();
+		double tiempo1 = fin1 - inicio1;
+
+		double inicio2 = microsegundos();
+		sumaSubMax2(v, n);
+		double fin2 = microsegundos();
+		double tiempo2 = fin2 - inicio2;
+
+		printf("%15d%15.2f%15.2f\n", n, tiempo1, tiempo2);
+	}
+	printf("\n");
+
 	test1();
 	test2();
 	return 0;
 }
-
-
