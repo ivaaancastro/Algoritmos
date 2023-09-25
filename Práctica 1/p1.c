@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <math.h>
 
 
 int sumaSubMax1(int v[], int n) {
@@ -84,7 +85,7 @@ void test2() {
 	printf("test\n");
 	printf("%33s%15s%15s\n", "", "sumaSubMax1", "sumaSubMax2");
 	for (i=0; i<10; i++) {
-		aleatorio(v, 500);
+		aleatorio(v, 9);
 		listar_vector(v, 9);
 		a = sumaSubMax1(v, 9);
 		b = sumaSubMax2(v, 9);
@@ -92,38 +93,99 @@ void test2() {
 	}
 }
 
+void tablas1 () {
+    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
+    int num_t = sizeof(t) / sizeof(t[0]);
+    int j, k = 100, n, i;
+    double inicio, fin, tiempo1, tiempo2, tiempo;
+
+    printf("\nTiempos de ejecución (SumaSubMax 1)\n\n");
+    printf("%16s%15s\n", "Tamaño", "Tiempo");
+
+    for (i = 0; i < num_t; i++) {
+        n = t[i];
+        int v[n];
+        aleatorio(v, n);
+        inicio = microsegundos();
+        sumaSubMax1(v, n);
+        fin = microsegundos();
+        tiempo = fin - inicio;
+        if (tiempo < 500) {
+            j = 0;
+            inicio = microsegundos();
+            while (j < k) {
+                aleatorio(v, n);
+                sumaSubMax1(v, n);
+                j++;
+            }
+            fin = microsegundos();
+            tiempo1 = fin - inicio;
+            printf("%f\n", tiempo1);
+            inicio = microsegundos();
+            j = 0;
+            while (j < k) {
+                aleatorio(v, n);
+                j++;
+            }
+            fin = microsegundos();
+            tiempo2 = fin - inicio;
+            printf("%f\n", tiempo2);
+            tiempo = (tiempo1 - tiempo2) / k;
+        }
+        printf("%15d%15.2f\n", n, tiempo);
+    }
+    printf("\n");
+}
+
+void tablas2() {
+    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
+    int num_t = sizeof(t) / sizeof(t[0]);
+    int j, k = 1000, n, i;
+    double inicio, fin, tiempo1, tiempo2, tiempo;
+
+    printf("\nTiempos de ejecución (SumaSubMax 2)\n\n");
+    printf("%16s%15s\n", "Tamaño", "Tiempo");
+
+    for (i = 0; i < num_t; i++) {
+        n = t[i];
+        int v[n];
+        aleatorio(v, n);
+        inicio = microsegundos();
+        sumaSubMax2(v, n);
+        fin = microsegundos();
+        tiempo = fin - inicio;
+        if (tiempo < 500) {
+            j = 0;
+            inicio = microsegundos();
+            while (j < k) {
+                aleatorio(v, n);
+                sumaSubMax2(v, n);
+                j++;
+            }
+            fin = microsegundos();
+            tiempo1 = fin - inicio;
+            j = 0;
+            inicio = microsegundos();
+            while (j < k) {
+                aleatorio(v, n);
+                j++;
+            }
+            fin = microsegundos();
+            tiempo2 = fin - inicio;
+            tiempo = (tiempo1 - tiempo2) / k;
+        }
+
+        printf("%15d%15.2f\n", n, tiempo);
+    }
+}
+
 int main() {
 	inicializar_semilla();
 
-	int i = 0;
-	int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
-	int num_t = sizeof(t) / sizeof(t[0]);
-
-	printf("Tiempos de ejecución \n\n");
-	printf("%15s%15s%15s\n", "Tamaño", "Tiempo1", "Tiempo2");
-
-	for (i = 0; i < num_t; i++)
-	{
-		int n = t[i];
-		int v[n];
-
-		aleatorio(v, n);
-
-		double inicio1 = microsegundos();
-		sumaSubMax1(v, n);
-		double fin1 = microsegundos();
-		double tiempo1 = fin1 - inicio1;
-
-		double inicio2 = microsegundos();
-		sumaSubMax2(v, n);
-		double fin2 = microsegundos();
-		double tiempo2 = fin2 - inicio2;
-
-		printf("%15d%15.2f%15.2f\n", n, tiempo1, tiempo2);
-	}
-	printf("\n");
-
 	test1();
 	test2();
+
+    tablas1();
+    tablas2();
 	return 0;
 }
