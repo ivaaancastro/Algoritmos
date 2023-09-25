@@ -95,13 +95,14 @@ void test2() {
 int main() {
 	inicializar_semilla();
 
+	int i = 0;
 	int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
 	int num_t = sizeof(t) / sizeof(t[0]);
 
 	printf("Tiempos de ejecución \n\n");
 	printf("%15s%15s%15s\n", "Tamaño", "Tiempo1", "Tiempo2");
 
-	for (int i = 0; i < num_t; i++)
+	for (i = 0; i < num_t; i++)
 	{
 		int n = t[i];
 		int v[n];
