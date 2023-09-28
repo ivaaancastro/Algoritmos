@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <math.h>
-
+#include <string.h>
 
 int sumaSubMax1(int v[], int n) {
 	int i, j;
@@ -34,10 +34,10 @@ int sumaSubMax2(int v[], int n) {
 
 
 double microsegundos() { /* obtiene la hora del sistema en microsegundos */
-struct timeval t;
-if (gettimeofday(&t, NULL) < 0 )
-return 0.0;
-return (t.tv_usec + t.tv_sec * 1000000.0);
+    struct timeval t;
+    if (gettimeofday(&t, NULL) < 0 )
+        return 0.0;
+    return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
 void inicializar_semilla() {
@@ -93,27 +93,31 @@ void test2() {
 	}
 }
 
-void tablaTiempos(int (*func)(int[], int), const char* nombreFunc) {
-    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
-    int k = 1000, n;
-    double inicio, fin, tiempo, relacion;
-
+void comprueba(const char* nombreFunc){
     printf("\nTiempos de ejecución (%s)\n\n", nombreFunc);
-    printf("%16s%15s%15s%15s%15s\n", "Tamaño", "n", "(t(n)/n^1.8)", "(t(n)/n^2)", "(t(n)/n^2.2)");
+    if (strcmp(nombreFunc, "sumaSubMax1") == 0) {
+        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+               "(t(n)/n^1.8)", "(t(n)/n^2)", "(t(n)/n^2.2)");
+    } else
+        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+               "(t(n)/n^0.7)", "(t(n)/n^0.9)", "(t(n)/n^1.1)");
+}
 
+void tablaTiempos(int (*func)(int[], int), const char* nombreFunc, float cota) {
+    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
+    int k = 1000, n, v[32000], asterisco = 0;
+    double inicio, fin, tiempo;
+    
+    comprueba(nombreFunc);
     for (int i = 0; i < 7; i++) {
         n = t[i];
-        int v[n];
         aleatorio(v, n);
         inicio = microsegundos();
         func(v, n);
         fin = microsegundos();
         tiempo = fin - inicio;
-        relacion = tiempo / pow(n, 1.8);
-
-        if (tiempo < 500) {
-            if(nombreFunc == "sumaSubMax1")
-            printf("(*)");
+        if (tiempo < 500) {     //if(nombreFunc == "sumaSubMax2")    //???
+            asterisco = 1;
             double tiempoPromedio = 0.0;
             for (int j = 0; j < k; j++) {
                 aleatorio(v, n);
@@ -124,22 +128,31 @@ void tablaTiempos(int (*func)(int[], int), const char* nombreFunc) {
             }
             tiempoPromedio /= k;
             tiempo = tiempoPromedio;
-            relacion = tiempoPromedio / pow(n, 1.8);
         }
-        printf("%15d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, relacion, relacion / pow(n, 2.0), relacion / pow(n, 2.2));
+        if (asterisco == 1) {
+            printf("(*)%12d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+        } else
+            printf("%15d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+    asterisco = 0;
     }
 }
 
 
-
 int main() {
+    int i;
 	inicializar_semilla();
 
 	test1();
 	test2();
 
-    tablaTiempos(sumaSubMax1, "sumaSubMax1");
-	tablaTiempos(sumaSubMax2, "sumaSubMax2");
+    for (i = 0; i < 3; i++) {
+        tablaTiempos(sumaSubMax1, "sumaSubMax1", 2.0);
+    }
+    for (i = 0; i < 3; i++) {
+        tablaTiempos(sumaSubMax2, "sumaSubMax2", 0.9);
+    }
 
 	return 0;
 }
