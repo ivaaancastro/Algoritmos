@@ -1,0 +1,99 @@
+PRÁCTICA 1: "SUMA DE LA SUBSECUENCIA MÁXIMA"
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN:leandro.mbalboa
+GRUPO: 4.3
+FECHA: 30/09/2023	
+
+Práctica realizada en:
+-Ordenador portátil:
+ SO: Ubuntu 22.04.3 LTS
+ CPU: AMD Ryzen 7 6800H with Radeon Graphics            3.20 GHz
+ RAM: 8GB
+ GPU: NVIDIA GeForce RTX 3060
+ 
+
+Esta práctica consiste en determinar el tiempo de ejecución de dos algoritmos: 
+sumaSubMax1 y sumaSubMax2. Estos algoritmos buscan encontrar la suma máxima de 
+una subsecuencia en un array de enteros. El análisis de los resultados se hizo 
+a través de una comprobación empírica de la complejidad teórica.
+
+Todas las mediciones de tiempo se realizaron en microsegundos (µs) 
+utilizando la función microsegundos().
+
+El análisis se realizó utilizando tamaños de entrada que siguen una progresión
+geométrica de razón dos (2). Los tamaños de entrada utilizados son: 500, 1000, 
+2000, 4000, 8000, 16000 y 32000 elementos.
+
+--------------------
+Tabla de Resultados
+--------------------
+A continuación, se presentan los resultados del análisis de rendimiento para 
+cada uno de los algoritmos. Las tablas muestran el tamaño de entrada, el tiempo 
+de ejecución medido (t(n)), así como las cotas teóricas calculadas para una cota
+subestimada (t(n)/n^cota_sub) y una cota sobrestimada (t(n)/n^cota_sob).
+
+Tiempos de ejecución (sumaSubMax1)
+
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500         260.75       0.003615       0.001043       0.000301
+           1000        1048.00       0.004172       0.001048       0.000263
+           2000        4563.00       0.005217       0.001141       0.000249
+           4000       15932.00       0.005231       0.000996       0.000190
+           8000       64843.00       0.006114       0.001013       0.000168
+          16000      261985.00       0.007093       0.001023       0.000148
+          32000     1057085.00       0.008219       0.001032       0.000130
+
+
+Cota subestimada: n^0.1.8
+Cota ajustada: n^2
+Cota sobrestimada: n^2.2
+
+Tiempos de ejecución (sumaSubMax2)
+
+         Tamaño           t(n)   (t(n)/n^0.7)   (t(n)/n^0.9)   (t(n)/n^1.1)
+(*)         500           1.91       0.024621       0.007104       0.002050
+(*)        1000           3.82       0.030359       0.007626       0.001916
+(*)        2000           6.32       0.030888       0.006754       0.001477
+(*)        4000          13.16       0.039617       0.007542       0.001436
+(*)        8000          24.33       0.045078       0.007470       0.001238
+(*)       16000          46.46       0.052987       0.007644       0.001103
+(*)       32000          89.89       0.063109       0.007926       0.000995
+
+
+(*) -> tiempos promedio (en µs) obtenido con 1000 ejecuciones del algoritmo
+
+Cota subestimada: n^0.7
+Cota ajustada: n^0.9
+Cota sobrestimada: n^1.1
+
+Se observaron mediciones anómalas en algunos casos en los que el tiempo de 
+ejecución fue menor de 500 µs. Para abordar esto, se realizó un promedio de 
+tiempos en bucles y se indicaron las iteraciones empleadas.
+
+--------------
+Conclusiones
+--------------
+
+- Los valores de dividir el tiempo entre el número de elementos del vector elevados
+	a la cota subestimada tienden a infinito a medida que aumenta n.
+
+- Los valores de dividir el tiempo entre el número de elementos del vector elevados
+	a la cota ajustada tienden a la constante '0.0010' para sumaSubMax1
+	y a la constante '0.0075' para sumaSubMax2.
+
+- Los valores de dividir el tiempo entre el número de elementos del vector 
+	elevados a la cota sobreestimada tienden a 0 a medida que aumenta n.
+
+- La complejidad computacional obtenida empíricamente de cada algorimo es:
+	- sumaSumMax1 -> O(n^2.2)
+	- sumaSumMax2 -> O(n^1.1)
+	
+	
+
+
+Como conclusión, basándonos en los datos obtenidos podemos afirmar que el algoritmo
+sumaSubMax2 es mucho más rápido que sumaSubMax1 para cualquier número de elementos del 
+vector, y tiene una complejidad computacional bastante inferior (O(n^1.1) de sumaSubMax2 
+frente a O(n^2.2) de sumaSubMax1).
+
