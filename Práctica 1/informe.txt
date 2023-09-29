@@ -1,7 +1,7 @@
 PRÁCTICA 1: "SUMA DE LA SUBSECUENCIA MÁXIMA"
 AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
 AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
-AUTOR: Leandro Malo Balboa              LOGIN:leandro.mbalboa
+AUTOR: Leandro Malo Balboa              LOGIN: leandro.mbalboa
 GRUPO: 4.3
 FECHA: 30/09/2023	
 
@@ -75,11 +75,11 @@ tiempos en bucles y se indicaron las iteraciones empleadas.
 Conclusiones
 --------------
 
-- Los valores de dividir el tiempo entre el número de elementos del vector elevados
-	a la cota subestimada tienden a infinito a medida que aumenta n.
+- Los valores de dividir el tiempo entre el número de elementos del vector 
+	elevados a la cota subestimada tienden a infinito a medida que aumenta n.
 
-- Los valores de dividir el tiempo entre el número de elementos del vector elevados
-	a la cota ajustada tienden a la constante '0.0010' para sumaSubMax1
+- Los valores de dividir el tiempo entre el número de elementos del vector
+	elevados a la cota ajustada tienden a la constante '0.0010' para sumaSubMax1
 	y a la constante '0.0075' para sumaSubMax2.
 
 - Los valores de dividir el tiempo entre el número de elementos del vector 
@@ -92,8 +92,7 @@ Conclusiones
 	
 
 
-Como conclusión, basándonos en los datos obtenidos podemos afirmar que el algoritmo
-sumaSubMax2 es mucho más rápido que sumaSubMax1 para cualquier número de elementos del 
-vector, y tiene una complejidad computacional bastante inferior (O(n^1.1) de sumaSubMax2 
-frente a O(n^2.2) de sumaSubMax1).
-
+Como conclusión, basándonos en los datos obtenidos podemos afirmar que el 
+algoritmo sumaSubMax2 es mucho más rápido que sumaSubMax1 para cualquier número
+de elementos del vector, y tiene una complejidad computacional bastante inferior
+(O(n^1.1) de sumaSubMax2 frente a O(n^2.2) de sumaSubMax1).
