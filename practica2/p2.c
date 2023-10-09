@@ -101,6 +101,14 @@ void inicializar_descendente(int v[], int n)
     }
 }
 
+void inicializar_ascendente(int v[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        v[i] = n + i;
+    }
+}
+
 void test_inserccion()
 {
     printf("INSERCCIÓN\n\n");
@@ -167,9 +175,83 @@ void test_shell()
     printf("\nEstá ordenado? %d\n", esta_ordenado(v, 9));
 }
 
+void comprueba(const char* nombreFunc, int situacion_inicial){
+    if (situacion_inicial == 0){
+        printf("\nTiempos de ejecución (%s Ascendente)\n\n", nombreFunc);
+    }
+    else if (situacion_inicial == 1){
+        printf("\nTiempos de ejecución (%s Descendente)\n\n", nombreFunc);
+    }
+    else{
+        printf("\nTiempos de ejecución (%s Aleatorio)\n\n", nombreFunc);
+    }
+        
+    if (strcmp(nombreFunc, "ordenacionInsercion") == 0) {
+        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+               "(t(n)/n^1.8)", "(t(n)/n^2)", "(t(n)/n^2.2)");
+    } else
+        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+               "(t(n)/n^0.8)", "(t(n)/n^1.0)", "(t(n)/n^1.2)");
+}
+
+void tablaTiempos(int (*func)(int[], int), const char* nombreFunc, float cota, int situacion_inicial){
+    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
+    int k = 1000, n, v[32000], asterisco = 0, i, j;
+    double inicio, fin, tiempo, tiempoPromedio;
+    
+    comprueba(nombreFunc, situacion_inicial);
+
+    for (i = 0; i < 7; i++) {
+        n = t[i];
+        if (situacion_inicial == 0){
+            inicializar_ascendente(v,n);
+        }
+        else if (situacion_inicial == 1){
+            inicializar_descendente(v,n);
+        }
+        else{
+            aleatorio(v,n);
+        }
+        
+        aleatorio(v, n);
+        inicio = microsegundos();
+        func(v, n);
+        fin = microsegundos();
+        tiempo = fin - inicio;
+        if (tiempo < 500) { 
+            asterisco = 1;
+            tiempoPromedio = 0.0;
+            for (j = 0; j < k; j++) {
+                aleatorio(v, n);
+                inicio = microsegundos();
+                func(v, n);
+                fin = microsegundos();
+                tiempoPromedio += fin - inicio;
+            }
+            tiempoPromedio /= k;
+            tiempo = tiempoPromedio;
+        }
+        if (asterisco == 1) {
+            printf("(*)%12d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+        } else {
+            printf("%15d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+        }
+        asterisco = 0;
+    }
+}
+
+
+
+
 int main()
 {
     inicializar_semilla();
     test_inserccion();
     test_shell();
+    tablaTiempos(ordenacionInsercion, "ordenacionInsercion", 2.0, 0);
+    tablaTiempos(ordenacionInsercion, "ordenacionInsercion", 2.0, 1);
+    tablaTiempos(ordenacionInsercion, "ordenacionInsercion", 2.0, 2);
+    tablaTiempos(ordenacionShell, "ordenacionShell", 1.0, 0);
+    tablaTiempos(ordenacionShell, "ordenacionShell", 1.0, 1);
+    tablaTiempos(ordenacionShell, "ordenacionShell", 1.0, 2);
 }
