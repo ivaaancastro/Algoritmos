@@ -1,0 +1,170 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <time.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <math.h>
+#include <string.h>
+
+void ord_ins(int v[],int n){
+    int i = 1;
+    int x;
+    int j;
+
+    for(i = 1; i < n; i++) {
+        x = v[i];
+        j = i - 1;
+        while (j > 0 && v[j] > x) {
+            v[j + 1] = v[j];
+            j = j - 1;
+        }
+        v[j+1] = x;
+    }
+}
+
+void ord_shell(int v[], int n){
+    int incremento;
+    int tmp;
+    int i;
+    int j;
+    int seguir;
+
+    incremento = n;
+    do {
+        incremento = incremento/2;
+        for(i = incremento + 1; i < n;i++){
+            tmp = v[i];
+            j = i;
+            seguir = true;
+            while (j-incremento > 0 && seguir){
+                if(tmp < v[j-incremento]){
+                    v[j] = v[j-incremento];
+                    j = j - incremento;
+                }else seguir = false;
+            }
+            v[j] = tmp;
+        }
+    }
+    while(incremento != 1);
+}
+
+double microsegundos() { /* obtiene la hora del sistema en microsegundos */
+    struct timeval t;
+    if (gettimeofday(&t, NULL) < 0 )
+        return 0.0;
+    return (t.tv_usec + t.tv_sec * 1000000.0);
+}
+
+void inicializar_semilla() {
+    srand(time(NULL));
+    /* se establece la semilla de una nueva serie de enteros pseudo-aleatorios */
+}
+
+void aleatorio(int v [], int n) {
+    int i, m=2*n+1;
+    for (i=0; i < n; i++)
+        v[i] = (rand() % m) - n;
+    /* se generan números pseudoaleatorio entre -n y +n */
+}
+
+void listar_vector(int v[], int n){
+    int i;
+    printf("[");
+    for (i = 0; i < n; i++)
+        printf(" %2d", v[i]);
+    printf(" ]");
+}
+
+int ordenado( int v[], int n){
+    int i;
+    for(i = 1; i < n; ++i){ //Recorremos el vector
+        if(v[i-1]> v[i]){
+            return 0; //Devuelve esto si el arreglo no está ordenada
+        }
+    }
+    return 1; //Devuelve un uno si el arreglo no está ordenado
+}
+
+void inicializarDesc(int v[], int n){
+    int i;
+    for(i = 0; i < n; i++) {
+        v[i] = n - i;
+    }
+}
+
+void inicializarAsc(int v[], int n){
+    int i;
+    for(i = 0; i < n; i++){
+        v[i] = i;
+    }
+}
+
+void testInsercion() {
+    int v[10];
+    printf("Insercion:\n");
+    printf("Inicializacion aleatoria\n");
+    aleatorio(v,10);
+    listar_vector(v,10);
+    printf("\n");
+
+    printf("ordenado? %d\n", ordenado(v,10));
+
+    printf("Ordenación por inserción\n");
+    ord_ins(v,10);
+    listar_vector(v, 10);
+    printf("\n");
+    printf("ordenado? %d",ordenado(v,10));
+    printf("\n");
+
+    printf("Inicializacion descendiente\n");
+    inicializarDesc(v,10);
+    listar_vector(v,10);
+    printf("\nordenado? %d\n", ordenado(v,10));
+    printf("Ordenacion por insercion \n");
+    ord_ins(v,10);
+    printf("ordenado? %d\n", ordenado(v,10));
+
+    printf("Inicializacion ascendiente\n");
+    inicializarAsc(v,10);
+    listar_vector(v,10);
+    printf("\nordenado? %d\n", ordenado(v,10));
+}
+
+void testShell(){
+    int v[17];
+    printf("Shell:\n");
+    printf("Inicializacion aleatoria\n");
+    aleatorio(v,17);
+    listar_vector(v,17);
+    printf("\n");
+
+    printf("ordenado? %d\n", ordenado(v,17));
+
+    printf("Ordenación por Shell\n");
+    ord_shell(v,17);
+    listar_vector(v,9);
+    printf("\n");
+
+    printf("Esta ordenado? %d\n", ordenado(v, 17));
+
+    printf("Inicializacion descendiente\n");
+    inicializarDesc(v,10);
+    listar_vector(v,10);
+    printf("\nordenado? %d\n", ordenado(v,10));
+    printf("Ordenacion por Shell \n");
+    ord_shell(v,10);
+    printf("ordenado? %d\n", ordenado(v,10));
+
+    printf("Inicializacion ascendiente\n");
+    inicializarAsc(v,10);
+    listar_vector(v,10);
+    printf("\nordenado? %d\n", ordenado(v,10));
+
+
+}
+int main() {
+    inicializar_semilla();
+    testInsercion();
+    testShell();
+    return 0;
+}
