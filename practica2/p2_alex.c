@@ -172,8 +172,8 @@ void comprueba(const char* nombreFunc, const char* ordenacion){
 void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
                   const char* nombreFunc, const char* ordenacion, float cota){
     int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
-    int k = 1000, n, v[32000], asterisco = 0, i, j;
-    double inicio, fin, tiempo, tiempoPromedio;
+    int k = 1000, n, v[32000], asterisco = 0, i, j, l;
+    double inicio, fin, tiempo1, tiempo2, tiempo;
 
     comprueba(nombreFunc, ordenacion);
     for (i = 0; i < 7; i++) {
@@ -185,22 +185,25 @@ void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
         tiempo = fin - inicio;
         if (tiempo < 500) {
             asterisco = 1;
-            tiempoPromedio = 0.0;
+            inicio = microsegundos();
             for (j = 0; j < k; j++) {
                 ord(v, n);
-                inicio = microsegundos();
                 func(v, n);
-                fin = microsegundos();
-                tiempoPromedio += fin - inicio;
             }
-            tiempoPromedio /= k;
-            tiempo = tiempoPromedio;
+            fin = microsegundos();
+            tiempo1 = fin - inicio;
+            inicio = microsegundos();
+            for (l = 0; l < k; l++)
+                ord(v, n);
+            fin = microsegundos();
+            tiempo2 = fin - inicio;
+            tiempo = (tiempo1 - tiempo2) / k;
         }
         if (asterisco == 1) {
-            printf("(*)%12d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            printf("(*)%12d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
             pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         } else
-            printf("%15d%15.2f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            printf("%15d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
             pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         asterisco = 0;
     }
