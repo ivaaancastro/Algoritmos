@@ -8,9 +8,9 @@ FECHA: 30/09/2023
 Práctica realizada en:
 -Ordenador portátil:
  SO: Ubuntu 22.04.3 LTS
- CPU: AMD Ryzen 7 6800H with Radeon Graphics            3.20 GHz
- RAM: 8GB
- GPU: NVIDIA GeForce RTX 3060
+ CPU: Intel Core i7-9750H            2.60 GHz
+ RAM: 32GB
+ GPU: NVIDIA GeForce RTX 2060
  
 
 Esta práctica consiste en ordenar ascendentemente un vector de n números enteros, 
@@ -38,63 +38,105 @@ subestimada (t(n)/cota_sub) y una cota sobrestimada (t(n)/cota_sob).
 
 Tiempos de ejecución (inserción, aleatorio)
 
-[TABLA]
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500        128.086      0.0017756      0.0005123      0.0001478
+           1000        522.000      0.0020781      0.0005220      0.0001311
+           2000       2075.000      0.0023723      0.0005188      0.0001134
+           4000       7918.000      0.0025996      0.0004949      0.0000942
+           8000      32609.000      0.0030745      0.0005095      0.0000844
+          16000     128012.000      0.0034660      0.0005000      0.0000721
+          32000     506073.000      0.0039350      0.0004942      0.0000621
 
-Cota subestimada: 
-Cota ajustada: 
-Cota sobrestimada: 
+Cota subestimada: 1.8
+Cota ajustada: 2
+Cota sobrestimada: 2.2
 
-Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 0.00050
 
 Tiempos de ejecución (inserción, descendente)
 
-[TABLA]
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500        257.215      0.0035657      0.0010289      0.0002969
+           1000       1015.000      0.0040408      0.0010150      0.0002550
+           2000       4069.000      0.0046519      0.0010172      0.0002224
+           4000      16418.000      0.0053903      0.0010261      0.0001953
+           8000      64205.000      0.0060535      0.0010032      0.0001663
+          16000     253959.000      0.0068762      0.0009920      0.0001431
+          32000    1050576.000      0.0081688      0.0010260      0.0001289
 
-Cota subestimada: 
-Cota ajustada: 
-Cota sobrestimada: 
+Cota subestimada: 1.8
+Cota ajustada: 2
+Cota sobrestimada: 2.2
 
-Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 0.0010
 
 Tiempos de ejecución (inserción, ascendente)
 
-[TABLA]
+         Tamaño           t(n)   (t(n)/n^0.8)     (t(n)/n^1)   (t(n)/n^1.2)
+(*)         500          1.439      0.0099744      0.0028780      0.0008304
+(*)        1000          2.836      0.0112903      0.0028360      0.0007124
+(*)        2000          5.541      0.0126696      0.0027705      0.0006058
+(*)        4000         11.118      0.0146009      0.0027795      0.0005291
+(*)        8000         22.342      0.0168519      0.0027927      0.0004628
+(*)       16000         44.839      0.0194250      0.0028024      0.0004043
+(*)       32000         89.684      0.0223149      0.0028026      0.0003520
 
-Cota subestimada: 
-Cota ajustada: 
-Cota sobrestimada: 
+Cota subestimada: 0.8
+Cota ajustada: 1
+Cota sobrestimada: 1.2
 
-Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 0.0028
 
 Tiempos de ejecución (shell, aleatorio)
 
-[TABLA]
+         Tamaño           t(n)     (t(n)/n^1)   (t(n)/n^1.2)   (t(n)/n^1.4)
+(*)         500         43.599      0.0871980      0.0251601      0.0072597
+(*)        1000         99.558      0.0995580      0.0250078      0.0062817
+(*)        2000        230.079      0.1150395      0.0251560      0.0055009
+           4000        544.000      0.1359999      0.0258897      0.0049285
+           8000       1251.000      0.1563749      0.0259149      0.0042947
+          16000       2712.000      0.1694999      0.0244538      0.0035279
+          32000       6378.000      0.1993124      0.0250325      0.0031439
 
-Cota subestimada: 
-Cota ajustada: 
-Cota sobrestimada: 
+Cota subestimada: 1
+Cota ajustada: 1.2
+Cota sobrestimada: 1.4
 
-Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 0.025
 
 Tiempos de ejecución (shell, descendente)
 
-[TABLA]
+         Tamaño           t(n)  (t(n)/n^0.95)  (t(n)/n^1.15)  (t(n)/n^1.35)
+(*)         500         17.488      0.0477220      0.0137697      0.0039731
+(*)        1000         39.433      0.0557006      0.0139914      0.0035145
+(*)        2000         87.124      0.0637029      0.0139301      0.0030461
+(*)        4000        193.675      0.0733021      0.0139542      0.0026564
+(*)        8000        424.263      0.0831189      0.0137747      0.0022828
+          16000        932.000      0.0945153      0.0136357      0.0019672
+          32000       2063.000      0.1082946      0.0136012      0.0017082
 
-Cota subestimada: 
-Cota ajustada: 
-Cota sobrestimada: 
+Cota subestimada: 0.95
+Cota ajustada: 1.15
+Cota sobrestimada: 1.35
 
-Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 0.0137
 
 Tiempos de ejecución (shell, ascendente)
 
-[TABLA]
+         Tamaño           t(n)  (t(n)/n^0.95)  (t(n)/n^1.15)  (t(n)/n^1.35)
+(*)         500         12.032      0.0328334      0.0094738      0.0027336
+(*)        1000         27.388      0.0386866      0.0097176      0.0024410
+(*)        2000         60.794      0.0444511      0.0097202      0.0021255
+(*)        4000        135.583      0.0513155      0.0097687      0.0018596
+(*)        8000        297.257      0.0582367      0.0096511      0.0015994
+          16000        648.000      0.0657145      0.0094806      0.0013678
+          32000       1407.000      0.0738587      0.0092762      0.0011650
 
-Cota subestimada: 
-Cota ajustada: 
-Cota sobrestimada: 
+Cota subestimada: 0.95
+Cota ajustada: 1.15
+Cota sobrestimada: 1.35
 
-Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 0.0095
 
 
 (*) -> tiempos promedio (en µs) obtenido con 1000 ejecuciones del algoritmo

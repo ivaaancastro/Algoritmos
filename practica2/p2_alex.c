@@ -208,29 +208,24 @@ void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
             tiempo = (tiempo1 - tiempo2) / k;
         }
         if (asterisco == 1) {
-            printf("(*)%12d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            printf("(*)%12d%15.3f%15.7f%15.7f%15.7f\n", n, tiempo, tiempo/
             pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         } else
-            printf("%15d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            printf("%15d%15.3f%15.7f%15.7f%15.7f\n", n, tiempo, tiempo/
             pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         asterisco = 0;
     }
 }
 
 int main() {
-    //int i;
     inicializar_semilla();
     test_ins();
     test_shell();
 
-    tablaTiempos(ord_ins, aleatorio, "insercion", "aleatorio", 2);
-    tablaTiempos(ord_ins, descendente, "insercion", "descendente", 2);
-    tablaTiempos(ord_ins, ascendente, "insercion", "ascendente", 1);
-    tablaTiempos(ord_shell, aleatorio, "shell", "aleatorio", 1.2);
-    tablaTiempos(ord_shell, descendente, "shell", "descendente", 1.15);
-    tablaTiempos(ord_shell, ascendente, "shell", "ascendente", 1.15);
-
-    /*for (i = 0; i < 3; i++) {
-        //tablaTiempos
-    }*/
+        tablaTiempos(ord_ins, aleatorio, "insercion", "aleatorio", 2);
+        tablaTiempos(ord_ins, descendente, "insercion", "descendente", 2);
+        tablaTiempos(ord_ins, ascendente, "insercion", "ascendente", 1);
+        tablaTiempos(ord_shell, aleatorio, "shell", "aleatorio", 1.2);
+        tablaTiempos(ord_shell, descendente, "shell", "descendente", 1.15);
+        tablaTiempos(ord_shell, ascendente, "shell", "ascendente", 1.15);
 }
