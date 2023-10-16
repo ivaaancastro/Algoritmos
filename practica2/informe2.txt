@@ -1,0 +1,195 @@
+PRÁCTICA 1: "ORDENACIÓN POR INSERCIÓN Y ORDENACIÓN SHELL"
+
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN: leandro.mbalboa
+GRUPO: 4.3
+FECHA: 30/09/2023	
+
+Práctica realizada en:
+-Ordenador portátil:
+ SO: Ubuntu 22.04.3 LTS
+ CPU: AMD Ryzen 7 6800H with Radeon Graphics            3.20 GHz
+ RAM: 8GB
+ GPU: NVIDIA GeForce RTX 3060
+ 
+
+Esta práctica consiste en determinar el tiempo de ejecución de dos algoritmos: 
+ord_ins y ord_shell. Estos algoritmos ordenan un array de forma ascendente,
+el cual viene dado de forma ascendente, descendente y aleatoria. El análisis
+de los resultados se hizo a través de una comprobación empírica de la
+complejidad teórica.
+
+Todas las mediciones de tiempo se realizaron en microsegundos (µs)
+utilizando la función microsegundos().
+
+El análisis se realizó utilizando tamaños de entrada que siguen una progresión
+geométrica de razón dos (2). Los tamaños de entrada utilizados son: 500, 1000, 
+2000, 4000, 8000, 16000 y 32000 elementos.
+
+--------------------
+Tabla de Resultados
+--------------------
+A continuación, se presentan los resultados del análisis de rendimiento para 
+cada uno de los algoritmos. Las tablas muestran el tamaño de entrada, el tiempo 
+de ejecución medido (t(n)), así como las cotas teóricas calculadas para una cota
+subestimada (t(n)/n^cota_sub) y una cota sobrestimada (t(n)/n^cota_sob).
+
+Para todas las tablas:
+Se observaron mediciones anómalas en algunos casos en los que el tiempo de 
+ejecución fue menor de 500 µs. Para abordar esto, se realizó un promedio de 
+tiempos en bucles y se indicaron las iteraciones empleadas.
+
+
+ --- Ordenacion por Inserción ---
+
+Tiempos de ejecución (insercion, aleatorio)
+
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500        104.481       0.001448       0.000418       0.000121
+(*)        1000        335.542       0.001336       0.000336       0.000084
+           2000       1299.000       0.001485       0.000325       0.000071
+           4000       5145.000       0.001689       0.000322       0.000061
+           8000      20582.000       0.001941       0.000322       0.000053
+          16000      81302.000       0.002201       0.000318       0.000046
+          32000     328030.000       0.002551       0.000320       0.000040
+
+(*) -> tiempo promedio (en µs) obtenido con k = 1000
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobrestimada: n^2.2
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden a infinito a medida que aumenta n.
+Los valores de dividir el tiempo entre el la cota ajustada tienden a la constante '0.00032'.
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 a medida que aumenta n.
+
+
+Tiempos de ejecución (insercion, descendente)
+
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500        166.271       0.002305       0.000665       0.000192
+           1000        663.000       0.002639       0.000663       0.000167
+           2000       2552.000       0.002918       0.000638       0.000140
+           4000      10196.000       0.003348       0.000637       0.000121
+           8000      41536.000       0.003916       0.000649       0.000108
+          16000     162088.000       0.004389       0.000633       0.000091
+          32000     644172.000       0.005009       0.000629       0.000079
+
+(*) -> tiempo promedio (en µs) obtenido con k = 1000
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobrestimada: n^2.2
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden a infinito a medida que aumenta n.
+Los valores de dividir el tiempo entre el la cota ajustada tienden a la constante '0.00063'.
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 a medida que aumenta n.
+
+Tiempos de ejecución (insercion, ascendente)
+
+         Tamaño           t(n)   (t(n)/n^0.8)     (t(n)/n^1)   (t(n)/n^1.2)
+(*)         500          1.053       0.007299       0.002106       0.000608
+(*)        1000          2.059       0.008197       0.002059       0.000517
+(*)        2000          4.135       0.009455       0.002067       0.000452
+(*)        4000          8.738       0.011475       0.002184       0.000416
+(*)        8000         16.135       0.012170       0.002017       0.000334
+(*)       16000         33.850       0.014664       0.002116       0.000305
+(*)       32000         66.765       0.016612       0.002086       0.000262
+
+(*) -> tiempo promedio (en µs) obtenido con k = 1000
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobrestimada: n^2.2
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden a infinito a medida que aumenta n.
+Los valores de dividir el tiempo entre el la cota ajustada tienden a la constante '0.0021'.
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 a medida que aumenta n.
+
+
+
+
+--- Ordenación Shell ---
+
+Tiempos de ejecución (shell, aleatorio)
+
+         Tamaño           t(n)     (t(n)/n^1)   (t(n)/n^1.2)   (t(n)/n^1.4)
+(*)         500         41.985       0.083970       0.024229       0.006991
+(*)        1000         96.324       0.096324       0.024195       0.006078
+(*)        2000        222.434       0.111217       0.024320       0.005318
+(*)        4000        502.133       0.125533       0.023897       0.004549
+           8000       1167.000       0.145875       0.024175       0.004006
+          16000       2425.000       0.151562       0.021866       0.003155
+          32000       5699.000       0.178094       0.022368       0.002809
+
+(*) -> tiempo promedio (en µs) obtenido con k = 1000
+
+Cota subestimada: n^0.8
+Cota ajustada: n^1
+Cota sobrestimada: n^1.2
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden a infinito a medida que aumenta n.
+Los valores de dividir el tiempo entre el la cota ajustada tienden a la constante '0.024'.
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 a medida que aumenta n.
+
+
+Tiempos de ejecución (shell, descendente)
+
+         Tamaño           t(n)  (t(n)/n^0.95)  (t(n)/n^1.15)  (t(n)/n^1.35)
+(*)         500         21.929       0.059841       0.017266       0.004982
+(*)        1000         48.249       0.068154       0.017119       0.004300
+(*)        2000        106.931       0.078185       0.017097       0.003739
+(*)        4000        235.800       0.089246       0.016989       0.003234
+           8000        540.000       0.105793       0.017532       0.002906
+          16000       1146.000       0.116217       0.016767       0.002419
+          32000       2416.000       0.126825       0.015928       0.002001
+
+(*) -> tiempo promedio (en µs) obtenido con k = 1000
+
+Cota subestimada: n^0.8
+Cota ajustada: n^1
+Cota sobrestimada: n^1.2
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden a infinito a medida que aumenta n.
+Los valores de dividir el tiempo entre el la cota ajustada tienden a la constante '0.017'.
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 a medida que aumenta n.
+
+
+Tiempos de ejecución (shell, ascendente)
+
+         Tamaño           t(n)  (t(n)/n^0.95)  (t(n)/n^1.15)  (t(n)/n^1.35)
+(*)         500         16.036       0.043760       0.012626       0.003643
+(*)        1000         36.083       0.050969       0.012803       0.003216
+(*)        2000         81.069       0.059276       0.012962       0.002834
+(*)        4000        178.093       0.067405       0.012832       0.002443
+(*)        8000        388.842       0.076179       0.012625       0.002092
+          16000        863.000       0.087518       0.012626       0.001822
+          32000       1854.000       0.097323       0.012223       0.001535
+
+(*) -> tiempo promedio (en µs) obtenido con k = 1000
+
+Cota subestimada: n^0.8
+Cota ajustada: n^1
+Cota sobrestimada: n^1.2
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden a infinito a medida que aumenta n.
+Los valores de dividir el tiempo entre el la cota ajustada tienden a la constante '0.012'.
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 a medida que aumenta n.
+
+
+--------------
+Conclusiones
+--------------
+
+LA COTA ES n^2 no solo el 2
+
+- La complejidad computacional obtenida empíricamente de cada algorimo es:
+	- ord_ins -> O(n^2)
+	- ord_shell -> O(n^1)
+
+
+Como conclusión, basándonos en los datos obtenidos podemos afirmar que el 
+algoritmo sumaSubMax2 es mucho más rápido que sumaSubMax1 para cualquier número
+de elementos del vector, y tiene una complejidad computacional bastante inferior
+(O(n^1) de sumaSubMax2 frente a O(n^2) de sumaSubMax1).
