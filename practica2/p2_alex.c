@@ -1,3 +1,11 @@
+/*
+PRÁCTICA 2: "ORDENACIÓN POR INSERCIÓN Y ORDENACIÓN DE SHELL"
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN:leandro.mbalboa
+GRUPO: 4.3
+FECHA: 30/09/2023
+ */
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
