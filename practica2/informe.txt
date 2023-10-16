@@ -1,0 +1,132 @@
+PRÁCTICA 2: "ORDENACIÓN POR INSERCIÓN Y ORDENACIÓN DE SHELL"
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN: leandro.mbalboa
+GRUPO: 4.3
+FECHA: 30/09/2023	
+
+Práctica realizada en:
+-Ordenador portátil:
+ SO: Ubuntu 22.04.3 LTS
+ CPU: AMD Ryzen 7 6800H with Radeon Graphics            3.20 GHz
+ RAM: 8GB
+ GPU: NVIDIA GeForce RTX 3060
+ 
+
+Esta práctica consiste en ordenar ascendentemente un vector de n números enteros, 
+que previamente pueden estar ordenados aleatoriamente, descendentemente o 
+ascendentemente. Como algoritmos de ordenación se utilizarán la ordenación por 
+inserción y la ordenación shell. El análisis de los resultados se hizo a través 
+de una comprobación empírica de la complejidad teórica. Se busca calular
+empíricamente las complejidades de los algoritmos para cada una de las diferentes
+situaciones iniciales del vector.
+
+Todas las mediciones de tiempo se realizaron en microsegundos (µs) 
+utilizando la función microsegundos().
+
+El análisis se realizó utilizando tamaños de entrada que siguen una progresión
+geométrica de razón dos (2). Los tamaños de entrada utilizados son: 500, 1000, 
+2000, 4000, 8000, 16000 y 32000 elementos.
+
+--------------------
+Tabla de Resultados
+--------------------
+A continuación, se presentan los resultados del análisis de rendimiento para 
+cada uno de los algoritmos. Las tablas muestran el tamaño de entrada, el tiempo 
+de ejecución medido (t(n)), así como las cotas teóricas calculadas para una cota
+subestimada (t(n)/cota_sub) y una cota sobrestimada (t(n)/cota_sob).
+
+Tiempos de ejecución (inserción, aleatorio)
+
+[TABLA]
+
+Cota subestimada: 
+Cota ajustada: 
+Cota sobrestimada: 
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+
+Tiempos de ejecución (inserción, descendente)
+
+[TABLA]
+
+Cota subestimada: 
+Cota ajustada: 
+Cota sobrestimada: 
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+
+Tiempos de ejecución (inserción, ascendente)
+
+[TABLA]
+
+Cota subestimada: 
+Cota ajustada: 
+Cota sobrestimada: 
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+
+Tiempos de ejecución (shell, aleatorio)
+
+[TABLA]
+
+Cota subestimada: 
+Cota ajustada: 
+Cota sobrestimada: 
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+
+Tiempos de ejecución (shell, descendente)
+
+[TABLA]
+
+Cota subestimada: 
+Cota ajustada: 
+Cota sobrestimada: 
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+
+Tiempos de ejecución (shell, ascendente)
+
+[TABLA]
+
+Cota subestimada: 
+Cota ajustada: 
+Cota sobrestimada: 
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a: 
+
+
+(*) -> tiempos promedio (en µs) obtenido con 1000 ejecuciones del algoritmo
+
+Se observaron mediciones anómalas en algunos casos en los que el tiempo de 
+ejecución fue menor de 500 µs. Para abordar esto, se realizó un promedio de 
+tiempos en bucles y se indicaron las iteraciones empleadas.
+
+--------------
+Conclusiones
+--------------
+
+- Los valores de dividir el tiempo entre la cota subestimada tienden a infinito 
+	a medida que aumenta n.
+
+- Los valores de dividir el tiempo entre el número de elementos del vector 
+	elevados a la cota sobreestimada tienden a 0 a medida que aumenta n.
+
+- La complejidad computacional obtenida empíricamente de cada algorimo según la 
+	ordenación del vector es:
+	- inserción, aleatorio -> O(n^2)
+	- inserción, descendente -> O(n^2)
+	- inserción, ascendente -> O(n^1)
+	- shell, aleatorio -> O(n^1.2)	
+	- shell, descendente -> O(n^1.15)
+	- shell, ascendente -> O(n^1.15)
+
+
+Como conclusión, basándonos en los datos obtenidos podemos afirmar que el algoritmo
+de ordenación de shell es mucho más rápido que el de ordenación por inserción, 
+ya que el de shell tiene cotas de entre O(n^1.15) y O(n^1.2), mientras que el de
+inserción tiene cotas de O(n^2). Hay una excepción, si el vector ya estaba
+previamente ordenado de forma ascendente, donde la ordenación por inserción sí
+es mejor, con una cota de O(n^1).
+
