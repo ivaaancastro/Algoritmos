@@ -1,0 +1,242 @@
+PRÁCTICA 2: "ORDENACIÓN POR INSERCIÓN Y ORDENACIÓN POR SHELL"
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN: leandro.mbalboa
+GRUPO: 4.3
+FECHA: 20/10/2023	
+
+Práctica realizada en:
+-Ordenador portátil:
+ SO: Ubuntu 22.04.3 LTS
+ CPU: AMD Ryzen 7 6800H with Radeon Graphics            3.20 GHz
+ RAM: 8GB
+ GPU: NVIDIA GeForce RTX 3060
+ 
+
+Esta practica tiene por objetivo determinar el tiempo de ejecución de 
+dos algoritmos: El algoritmo de ordenación por inserción y el de ordenación
+por shell. Estos dos algoritmos se encargan de ordenar ascendentemente un 
+vector de n números enteros, que previamente pueden estar ordenados 
+aleatoriamente, descendentemente o ascendentemente. El analisis de los 
+resultados se hizo a través de una comprobación empírica de la complejidad.
+
+Todas las mediciones presentes en este informe han sido realizadas en 
+microsegundos (µs).Para ello nos hemos apoyado en la función microsegundos().
+
+Para un correcto estudio de los tiempos de dichos algoritmos hemos empleado 
+arrays con datos de entrada que siguen una progresión geométrica de razón 2. 
+Los tamaños de entrada empleados en el estudio son: 500, 1000, 2000, 4000, 
+8000, 16000 y 32000 elementos respectivamente.
+
+---------------------
+Tablas de Resultados
+---------------------
+
+
+A continuación se mostrarán una serie de tablas con los resultados obtenidos
+en nuestro estudio para la ejecución de cada algoritmo, en dichas tablas se 
+mostrará la siguiente información: El tamaño del array empleado (n), el tiempo 
+medio de ejecución (t(n)), la cota subestimada, ajustada y sobreestimada. 
+
+También es importante destacar que para el correcto estudio de dichas 
+funciones se ha decidido que para aquellas mediciones de menos de 500 µs se 
+ha decidido realizar 1000 iteraciones y calculado su promedio.
+
+-------Ordenación por inserción-------
+
+Tiempos de ejecución (insercion, aleatorio)
+
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500        124.490      0.0017258      0.0004980      0.0001437 (#)
+(*)        1000        456.987      0.0018193      0.0004570      0.0001148 (#)
+           2000       1402.000      0.0016029      0.0003505      0.0000766
+           4000       5245.000      0.0017220      0.0003278      0.0000624
+           8000      21270.000      0.0020054      0.0003323      0.0000551
+          16000      85215.000      0.0023073      0.0003329      0.0000480
+          32000     338438.000      0.0026315      0.0003305      0.0000415
+
+
+(*) -> Tiempo medio para 1000 iteraciones 
+
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobrestimada: n^2.2
+
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre el la cota ajustada tienden a 
+la constante '0.00033'.
+
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+(#) -> Debemos destacar que obtenemos una medicion anomala a la hora de realizar
+1000 iteraciones. Ya que el resultado obtenido se desvía mucho del resultado
+esperado.
+
+
+Tiempos de ejecución (insercion, descendente)
+
+         Tamaño           t(n)   (t(n)/n^1.8)     (t(n)/n^2)   (t(n)/n^2.2)
+(*)         500        169.034      0.0023433      0.0006761      0.0001951
+           1000        660.000      0.0026275      0.0006600      0.0001658
+           2000       2742.000      0.0031348      0.0006855      0.0001499
+           4000      10745.000      0.0035278      0.0006716      0.0001278
+           8000      42672.000      0.0040233      0.0006668      0.0001105
+          16000     171180.000      0.0046349      0.0006687      0.0000965
+          32000     692644.000      0.0053857      0.0006764      0.0000850
+
+
+
+(*) -> Tiempo medio para 1000 iteraciones 
+
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobrestimada: n^2.2
+
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre el la cota ajustada tienden a 
+la constante '0.00067'.
+
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+
+Tiempos de ejecución (insercion, ascendente)
+
+         Tamaño           t(n)   (t(n)/n^0.8)     (t(n)/n^1)   (t(n)/n^1.2)
+(*)         500          1.013      0.0070216      0.0020260      0.0005846
+(*)        1000          2.006      0.0079860      0.0020060      0.0005039
+(*)        2000          3.949      0.0090295      0.0019745      0.0004318
+(*)        4000          7.987      0.0104890      0.0019967      0.0003801
+(*)        8000         16.020      0.0120834      0.0020025      0.0003319
+(*)       16000         32.338      0.0140093      0.0020211      0.0002916
+(*)       32000         64.717      0.0161027      0.0020224      0.0002540
+
+
+(*) -> Tiempo medio para 1000 iteraciones 
+
+
+Cota subestimada: n^0.8
+Cota ajustada: n^1
+Cota sobrestimada: n^1.2
+
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre el la cota ajustada tienden a 
+la constante '0.0020'.
+
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+
+-------Ordenación Shell-------
+
+Tiempos de ejecución (shell, aleatorio)
+
+         Tamaño           t(n)     (t(n)/n^1)   (t(n)/n^1.2)   (t(n)/n^1.4)
+(*)         500         35.631      0.0712620      0.0205619      0.0059329
+(*)        1000         82.486      0.0824860      0.0207195      0.0052045
+(*)        2000        185.094      0.0925470      0.0202375      0.0044254
+(*)        4000        421.382      0.1053455      0.0200541      0.0038176
+           8000        969.000      0.1211249      0.0200732      0.0033266
+          16000       2132.000      0.1332499      0.0192240      0.0027734
+          32000       4815.000      0.1504687      0.0188980      0.0023735
+
+(*) -> Tiempo medio para 1000 iteraciones 
+
+
+Cota subestimada: n^1
+Cota ajustada: n^1.2
+Cota sobrestimada: n^1.4
+
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre el la cota ajustada tienden a 
+la constante '0.020'.
+
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+
+Tiempos de ejecución (shell, descendente)
+
+         Tamaño           t(n)  (t(n)/n^0.95)  (t(n)/n^1.15)  (t(n)/n^1.35)
+(*)         500         14.369      0.0392107      0.0113139      0.0032645
+(*)        1000         32.339      0.0456801      0.0114743      0.0028822
+(*)        2000         71.134      0.0520114      0.0113735      0.0024871
+(*)        4000        156.451      0.0592136      0.0112722      0.0021458
+(*)        8000        342.327      0.0670665      0.0111144      0.0018419
+          16000        739.000      0.0749429      0.0108120      0.0015598
+          32000       1612.000      0.0846199      0.0106278      0.0013348
+
+(*) -> Tiempo medio para 1000 iteraciones 
+
+
+Cota subestimada: n^0.95
+Cota ajustada: n^1.15
+Cota sobrestimada: n^1.35
+
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre el la cota ajustada tienden a 
+la constante '0.011'.
+
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+Tiempos de ejecución (shell, ascendente)
+
+         Tamaño           t(n)  (t(n)/n^0.95)  (t(n)/n^1.15)  (t(n)/n^1.35)
+(*)         500         10.005      0.0273021      0.0078777      0.0022730
+(*)        1000         22.961      0.0324333      0.0081469      0.0020464
+(*)        2000         51.683      0.0377893      0.0082635      0.0018070
+(*)        4000        114.772      0.0434389      0.0082693      0.0015742
+(*)        8000        252.784      0.0495238      0.0082072      0.0013601
+          16000        570.000      0.0578044      0.0083394      0.0012031
+          32000       1169.000      0.0613652      0.0077071      0.0009680
+
+(*) -> Tiempo medio para 1000 iteraciones 
+
+
+Cota subestimada: n^0.95
+Cota ajustada: n^1.15
+Cota sobrestimada: n^1.35
+
+
+Los valores de dividir el tiempo entre el la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre el la cota ajustada tienden a 
+la constante '0.0082'.
+
+Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+
+--------------
+Conclusiones
+--------------
+
+Lo primero que debemos mencionar es la eficiencia que presenta el algoritmo
+de ordenación por inserción siempre y cuando el array proporcionado esté
+ya ordenado, ya que su complejidad es de O(n). En los casos en los que el 
+vector no se encuentra totalmente ordenado la opción más adecuada será emplear
+el algoritmo de ordenación por shell, pues la complejidad computacional de
+este algoritmo oscila entre O(n^1.15) y O(n^1.2) mientras que para el resto
+de casos la complejidad del algoritmo de ordenación por inserción es de 
+O(n^2)
+
