@@ -1,0 +1,194 @@
+/*
+PRÁCTICA 3: "MONTICULOS"
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN:leandro.mbalboa
+GRUPO: 4.3
+FECHA: 30/09/2023
+ */
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <math.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define TAM 256000
+struct monticulo{
+    int ultimo;
+    int vector[TAM];
+};
+
+typedef  struct monticulo * pmonticulo;
+
+void crearMonticulo(int v[], int n, pmonticulo m);
+int quitarMenor(pmonticulo m);
+void hundir(pmonticulo m, int n);
+
+
+#include "monticulo.h"
+void intercambiar(int *a, int *b){ //Ambos almacenan direcciones de memoria
+    int aux = *a; 
+    *a = *b; 
+    *b = aux;
+}
+
+void hundir(pmonticulo m, int i){
+    int hijoIzq, hijoDer, j; 
+    j = i; 
+
+    do { 
+        hijoIzq = 2 * i; 
+        hijoDer = 2 * i + 1;
+
+        if (hijoDer <= m->ultimo && m -> vector[hijoDer] > m ->vector[i]) { 
+            i = hijoDer; 
+        }
+        if (hijoIzq <= m->ultimo &&  m-> vector[hijoIzq] > m ->vector[i]) {
+            i = hijoIzq;
+        }
+        if (j != i){ 
+            intercambiar(&m->vector[j], &m->vector[i]);
+        }
+    } while (j != i); 
+}
+
+void crearMonticulo (int v[], int n, pmonticulo m){
+    for (int i = 0; i < n; i++){ 
+        m->vector[i+1] = v[i];
+    }
+
+    m -> ultimo = n; 
+
+    for (int i = n / 2; i >= 0; i--){
+        hundir(m,i); 
+    }
+}
+
+int quitarMenor(pmonticulo m){
+    int elementoMenor = m->vector[1];
+    if (m-> ultimo == 0){
+        return -1;
+    }
+    m->vector[1] = m->vector[m->ultimo];
+    m->ultimo--;
+    hundir(m,1);
+    return elementoMenor;
+}
+
+double microsegundos() { /* obtiene la hora del sistema en microsegundos */
+    struct timeval t;
+    if (gettimeofday(&t, NULL) < 0 )
+        return 0.0;
+    return (t.tv_usec + t.tv_sec * 1000000.0);
+}
+
+void inicializar_semilla() {
+    srand(time(NULL));
+/* se establece la semilla de una nueva serie de enteros pseudo-aleatorios */
+}
+
+void aleatorio(int v [], int n) {
+    int i, m=2*n+1;
+    for (i=0; i < n; i++)
+        v[i] = (rand() % m) - n;
+    /* se generan números pseudoaleatorio entre -n y +n */
+}
+void ordenarPorMonticulos (int v[], int n){
+    pmonticulo m = (pmonticulo) malloc(sizeof(struct monticulo));
+    crearMonticulo(v,n,m);
+
+    for(int i = 0; i < n; i++){
+        v[i] = quitarMenor(m);
+    }
+    free(m);
+}
+
+
+void ascendente (int v[], int n) {
+    int i;
+    for (i = 0; i < n; i++)
+        v[i] = i + 1;
+}
+
+void descendente (int v[], int n) {
+    int i;
+    for (i = 0; i < n; i++)
+        v[i] = n - i;
+}
+
+void listar_vector(int v[], int n){
+    int i;
+    printf("[");
+    for (i = 0; i < n; i++)
+        printf(" %2d", v[i]);
+    printf(" ]\n");
+}
+void comprueba(const char* nombreFunc, const char* ordenacion){
+    printf("\nTiempos de ejecución (%s, %s)\n\n", nombreFunc, ordenacion);
+    if (strcmp(nombreFunc, "insercion") == 0) {
+        if (strcmp(ordenacion, "ascendente") == 0) {
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.8)", "(t(n)/n^1)", "(t(n)/n^1.2)");
+        } else {
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^1.8)", "(t(n)/n^2)", "(t(n)/n^2.2)");
+        }
+    } else {
+        if (strcmp(ordenacion, "aleatorio") == 0) {
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^1)", "(t(n)/n^1.2)", "(t(n)/n^1.4)");
+        } else {
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.95)", "(t(n)/n^1.15)", "(t(n)/n^1.35)");
+        }
+    }
+}
+
+void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
+                  const char* nombreFunc, const char* ordenacion, float cota){
+    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
+    int k = 1000, n, v[32000], asterisco = 0, i, j, l;
+    double inicio, fin, tiempo1, tiempo2, tiempo;
+
+    comprueba(nombreFunc, ordenacion);
+    for (i = 0; i < 7; i++) {
+        n = t[i];
+        ord(v, n);
+        inicio = microsegundos();
+        func(v, n);
+        fin = microsegundos();
+        tiempo = fin - inicio;
+        if (tiempo < 500) {
+            asterisco = 1;
+            inicio = microsegundos();
+            for (j = 0; j < k; j++) {
+                ord(v, n);
+                func(v, n);
+            }
+            fin = microsegundos();
+            tiempo1 = fin - inicio;
+            inicio = microsegundos();
+            for (l = 0; l < k; l++)
+                ord(v, n);
+            fin = microsegundos();
+            tiempo2 = fin - inicio;
+            tiempo = (tiempo1 - tiempo2) / k;
+        }
+        if (asterisco == 1) {
+            printf("(*)%12d%15.3f%15.7f%15.7f%15.7f\n", n, tiempo, tiempo/
+                                                                   pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+        } else
+            printf("%15d%15.3f%15.7f%15.7f%15.7f\n", n, tiempo, tiempo/
+                                                                pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+        asterisco = 0;
+    }
+}
+
+
+int main() {
+    inicializar_semilla();
+
+    return 0;
+}
