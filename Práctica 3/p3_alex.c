@@ -23,7 +23,7 @@ struct monticulo {
 
 void listar_vector(int v[], int n);
 
-typedef struct monticulo *pmonticulo;
+typedef struct monticulo * pmonticulo;
 
 void hundir(pmonticulo m, int i) {
     int hijoIzq, hijoDer, j, aux;
@@ -162,22 +162,12 @@ void test() {
 void comprueba(const char* nombreFunc, const char* ordenacion){
     //Innecesario creo
     printf("\nTiempos de ejecución (%s, %s)\n\n", nombreFunc, ordenacion);
-    if (strcmp(nombreFunc, "insercion") == 0) {
-        if (strcmp(ordenacion, "ascendente") == 0) {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.8)", "(t(n)/n^1)", "(t(n)/n^1.2)");
-        } else {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^1.8)", "(t(n)/n^2)", "(t(n)/n^2.2)");
-        }
+    if (strcmp(ordenacion, "aleatorio") == 0) {
+        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                "(t(n)/n^0.9)", "(t(n)/n^1.1)", "(t(n)/n^1.3)");
     } else {
-        if (strcmp(ordenacion, "aleatorio") == 0) {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^1)", "(t(n)/n^1.2)", "(t(n)/n^1.4)");
-        } else {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.95)", "(t(n)/n^1.15)", "(t(n)/n^1.35)");
-        }
+        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                "(t(n)/n^0.95)", "(t(n)/n^1.15)", "(t(n)/n^1.35)");
     }
 }
 
@@ -225,4 +215,10 @@ int main() {
     inicializar_semilla();
     test();
 
+    for (int i = 0; i < 3; i++)
+        tablaTiempos(ord_mont, aleatorio, "monticulo", "aleatorio", 1.1);
+    for (int i = 0; i < 3; i++)
+        tablaTiempos(ord_mont, descendente, "monticulo", "descendente", 1.15);
+    for (int i = 0; i < 3; i++)
+        tablaTiempos(ord_mont, ascendente, "monticulo", "ascendente", 1.15);
 }
