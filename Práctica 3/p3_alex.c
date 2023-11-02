@@ -167,14 +167,14 @@ void comprueba(const char* nombreFunc, const char* ordenacion){
                 "(t(n)/n^0.9)", "(t(n)/n^1.1)", "(t(n)/n^1.3)");
     } else {
         printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                "(t(n)/n^0.95)", "(t(n)/n^1.15)", "(t(n)/n^1.35)");
+                "(t(n)/n^0.88)", "(t(n)/n^1.08)", "(t(n)/n^1.28)");
     }
 }
 
 void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
                   const char* nombreFunc, const char* ordenacion, float cota){
-    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
-    int k = 1000, n, v[32000], asterisco = 0, i, j, l;
+    int t[] = {2000, 4000, 8000, 16000, 32000, 64000, 128000};
+    int k = 1000, n, v[128000], asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
 
     comprueba(nombreFunc, ordenacion);
@@ -215,10 +215,10 @@ int main() {
     inicializar_semilla();
     test();
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 5; i++)
         tablaTiempos(ord_mont, aleatorio, "monticulo", "aleatorio", 1.1);
-    for (int i = 0; i < 3; i++)
-        tablaTiempos(ord_mont, descendente, "monticulo", "descendente", 1.15);
-    for (int i = 0; i < 3; i++)
-        tablaTiempos(ord_mont, ascendente, "monticulo", "ascendente", 1.15);
+    for (int i = 0; i < 5; i++)
+        tablaTiempos(ord_mont, descendente, "monticulo", "descendente", 1.08);
+    for (int i = 0; i < 5; i++)
+        tablaTiempos(ord_mont, ascendente, "monticulo", "ascendente", 1.08);
 }
