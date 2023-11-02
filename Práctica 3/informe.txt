@@ -1,16 +1,16 @@
-PRÁCTICA 2: "ORDENACIÓN POR INSERCIÓN Y ORDENACIÓN POR SHELL"
+PRÁCTICA 3: "ORDENACIÓN POR MONTÍCULOS"
 AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
 AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
 AUTOR: Leandro Malo Balboa              LOGIN: leandro.mbalboa
 GRUPO: 4.3
-FECHA: 20/10/2023	
+FECHA: 02/11/2023	
 
 Práctica realizada en:
 -Ordenador portátil:
  SO: Ubuntu 22.04.3 LTS
- CPU: AMD Ryzen 7 6800H with Radeon Graphics            3.20 GHz
- RAM: 8GB
- GPU: NVIDIA GeForce RTX 3060
+ CPU: Intel core i7-9750h            2.60 GHz
+ RAM: 32GB
+ GPU: NVIDIA GeForce RTX 2060
  
 
 Esta practica tiene por objetivo determinar el tiempo de ejecución de 
@@ -25,8 +25,8 @@ microsegundos (µs).Para ello nos hemos apoyado en la función microsegundos().
 
 Para un correcto estudio de los tiempos de dichos algoritmos hemos empleado 
 arrays con datos de entrada que siguen una progresión geométrica de razón 2. 
-Los tamaños de entrada empleados en el estudio son: 500, 1000, 2000, 4000, 
-8000, 16000 y 32000 elementos respectivamente.
+Los tamaños de entrada empleados en el estudio son: 2000, 4000, 8000, 16000, 
+32000, 64000 y 128000 elementos respectivamente.
 
 ---------------------
 Tablas de Resultados
@@ -67,7 +67,7 @@ Los valores de dividir el tiempo entre la cota subestimada tienden
 a infinito a medida que aumenta n.
 
 Los valores de dividir el tiempo entre la cota ajustada tienden a 
-la constante '0.048'.
+la constante '0.049'.
 
 Los valores de dividir el tiempo entre la cota sobrestimada tienden a 0 
 a medida que aumenta n.
@@ -147,7 +147,9 @@ aumentar, pero sigue siendo razonablemente rápido.
 
 En el caso de conjuntos de datos aleatorios, hemos observado que el tiempo de 
 ejecución es mayor en comparación con los conjuntos ordenados ascendentemente
-o descendentemente. Esto sugiere que el algoritmo de ordenación por montículos
-puede beneficiarse de datos preordenados. En general, hemos visto que las cotas
-subestimadas, ajustadas y sobrestimadas proporcionan una buena estimación
-del comportamiento del algoritmo en diferentes situaciones.
+o descendentemente, aunque es una diferencia bastante pequeña, sobre todo en 
+comparación con los otros algoritmos vistos. Esto sugiere que el algoritmo de 
+ordenación por montículos puede beneficiarse de datos preordenados. En general, 
+hemos visto que las cotas subestimadas, ajustadas y sobrestimadas proporcionan 
+una buena estimación del comportamiento del algoritmo en diferentes 
+situaciones.
