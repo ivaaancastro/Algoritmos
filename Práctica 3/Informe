@@ -158,7 +158,7 @@ Los valores de dividir el tiempo entre el la cota subestimada tienden
 a infinito a medida que aumenta n.
 
 Los valores de dividir el tiempo entre el la cota ajustada tienden a 
-la constante '0.0465'.
+la constante '0.047'.
 
 Los valores de dividir el tiempo entre el la cota sobrestimada tienden a 0 
 a medida que aumenta n.
@@ -168,7 +168,11 @@ a medida que aumenta n.
 Conclusiones
 --------------
 
-En esta práctica, hemos estudiado el algoritmo de ordenación por montículos
+Tras estudiar la complejidad del algoritmo de crear un monticulo, hemos llegado
+a determinar mediante el analisis empírico que la complejidad es de O(n).
+Resultado que coincide con lo esperado por los calculos teóricos.
+
+También hemos estudiado el algoritmo de ordenación por montículos
 y su rendimiento en diferentes escenarios. Hemos observado que el algoritmo
 se comporta de manera eficiente en la mayoría de los casos, y su complejidad
 computacional se ajusta a las cotas propuestas, siendo de O(n*log(n)). Sin
@@ -181,7 +185,7 @@ En el caso de conjuntos de datos aleatorios, hemos observado que el tiempo de
 ejecución es mayor en comparación con los conjuntos ordenados ascendentemente
 o descendentemente, aunque es una diferencia bastante pequeña, sobre todo en 
 comparación con los otros algoritmos vistos. Esto sugiere que el algoritmo de 
-ordenación por montículos puede beneficiarse de datos preordenados. En general, 
+ordenación por montículos puede beneficiarse de datos preordenados. En general,
 hemos visto que las cotas subestimadas, ajustadas y sobrestimadas proporcionan 
-una buena estimación del comportamiento del algoritmo en diferentes 
+una buena estimación del comportamiento del algoritmo en diferentes. 
 situaciones.
