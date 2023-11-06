@@ -70,7 +70,7 @@ int quitarMenor(pmonticulo m) {
     return x;
 }
 
-void ord_mont(int v[], int n) {
+void ordenarPorMonticulos(int v[], int n) {
     int i;
     pmonticulo m = malloc(sizeof(struct monticulo));
 
@@ -129,34 +129,37 @@ bool ordenado (int v[], int n) {
     return true;
 }
 
-void test() {
-    int v[9], n = 9;
-    printf("\nInicialización aleatoria:\n");
-    aleatorio(v, n);
+void test(int v[], int n, const char *tipo_inicializacion, int iteracion) {
+    printf("\nInicialización %s:\n", tipo_inicializacion);
+    if (strcmp(tipo_inicializacion, "aleatorio") == 0) {
+        aleatorio(v, n);
+    } else if (strcmp(tipo_inicializacion, "descendente") == 0) {
+        descendente(v, n);
+    } else if (strcmp(tipo_inicializacion, "ascendente") == 0) {
+        ascendente(v, n);
+    }
     listar_vector(v, n);
     printf("ordenado? %d\n", ordenado(v, n));
     printf("Ordenación por Montículos:\n");
-    ord_mont(v, n);
+    ordenarPorMonticulos(v, n);
     listar_vector(v, n);
     printf("ordenado? %d\n", ordenado(v, n));
 
-    printf("\nInicialización descendente:\n");
-    descendente(v, n);
-    listar_vector(v, n);
-    printf("ordenado? %d\n", ordenado(v, n));
-    printf("Ordenación por Montículos:\n");
-    ord_mont(v, n);
-    listar_vector(v, n);
-    printf("ordenado? %d\n", ordenado(v, n));
-
-    printf("\nInicialización ascendente:\n");
-    ascendente(v, n);
-    listar_vector(v, n);
-    printf("ordenado? %d\n", ordenado(v, n));
-    printf("Ordenación por  Montículos:\n");
-    ord_mont(v, n);
-    listar_vector(v, n);
-    printf("ordenado? %d\n", ordenado(v, n));
+    //Test para quitarMenor
+    if (iteracion==2){
+        pmonticulo m = malloc(sizeof(struct monticulo));
+        int menor;
+        printf("\nPrueba quitarMenor:\n");
+        aleatorio(v, n);
+        crearMonticulo(v, n, m);
+        for (int i = 0; i < n; i++) {
+            listar_vector(m->vector, n);
+            menor = quitarMenor(m);
+            printf("Menor: %d\n", menor);
+        }
+        listar_vector(m->vector, n);
+        free(m);
+    }
 }
 
 void comprueba(const char* nombreFunc, const char* ordenacion){
@@ -164,17 +167,17 @@ void comprueba(const char* nombreFunc, const char* ordenacion){
     printf("\nTiempos de ejecución (%s, %s)\n\n", nombreFunc, ordenacion);
     if (strcmp(ordenacion, "aleatorio") == 0) {
         printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                "(t(n)/n^0.8)", "(t(n)/n^1)", "(t(n)/n^1.2)");
+                "(t(n)/n^0.9)", "(t(n)/n^1.1)", "(t(n)/n^1.3)");
     } else {
         printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                "(t(n)/n^1)", "(t(n)/n^1.2)", "(t(n)/n^1.4)");
+                "(t(n)/n^0.88)", "(t(n)/n^1.08)", "(t(n)/n^1.28)");
     }
 }
 
 void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
                   const char* nombreFunc, const char* ordenacion, float cota){
-    int t[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
-    int k = 1000, n, v[32000], asterisco = 0, i, j, l;
+    int t[] = {2000, 4000, 8000, 16000, 32000, 64000, 128000};
+    int k = 1000, n, v[128000], asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
 
     comprueba(nombreFunc, ordenacion);
@@ -213,12 +216,16 @@ void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
 
 int main() {
     inicializar_semilla();
-    test();
-
-    for (int i = 0; i < 3; i++)
-    {
-        tablaTiempos(ord_mont, aleatorio, "monticulo", "aleatorio", 1);
-        tablaTiempos(ord_mont, descendente, "monticulo", "descendente", 1.2);
-        tablaTiempos(ord_mont, ascendente, "monticulo", "ascendente", 1.2);
+    const char *inicializacion[] = {"aleatorio", "descendente", "ascendente"};
+    int v[9], n = 9;
+    for (int i = 0; i < 3; i++) {
+        test(v, n, inicializacion[i], i);
     }
+
+    for (int i = 0; i < 5; i++)
+        tablaTiempos(ordenarPorMonticulos, aleatorio, "monticulo", "aleatorio", 1.1);
+    for (int i = 0; i < 5; i++)
+        tablaTiempos(ordenarPorMonticulos, descendente, "monticulo", "descendente", 1.08);
+    for (int i = 0; i < 5; i++)
+        tablaTiempos(ordenarPorMonticulos, ascendente, "monticulo", "ascendente", 1.08);
 }
