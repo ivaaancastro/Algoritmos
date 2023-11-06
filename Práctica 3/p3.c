@@ -174,11 +174,13 @@ void comprueba(const char* nombreFunc, const char* ordenacion){
         }
     } else {
         if (strcmp(ordenacion, "ascendente") == 0) {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.84)", "(t(n)/n^1.04)", "(t(n)/n^1.24)");
+            printf("%16s%15s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.84)", "(t(n)/n^1.04)",
+                   "(t(n)/n^1.24)", "(t(n)/n^1)");
     } else {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.82)", "(t(n)/n^1.02)", "(t(n)/n^1.22)");
+            printf("%16s%15s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.82)", "(t(n)/n^1.02)",
+                   "(t(n)/n^1.22)", "(t(n)/n^1)");
         }
     }
 }
@@ -229,7 +231,6 @@ void tablaTiempos_crear(void (*func)(int[], int, pmonticulo), void (*ord)(int[],
     int k = 1000, n, v[256000], asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
     pmonticulo m = malloc(sizeof(struct monticulo));;
-
     comprueba(nombreFunc, ordenacion);
     for (i = 0; i < 7; i++) {
         n = t[i];
@@ -255,11 +256,13 @@ void tablaTiempos_crear(void (*func)(int[], int, pmonticulo), void (*ord)(int[],
             tiempo = (tiempo1 - tiempo2) / k;
         }
         if (asterisco == 1) {
-            printf("(*)%12d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
-                                                                   pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+            printf("(*)%12d%15.3f%15.6f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            pow(n, cota-0.2), tiempo/pow(n, cota),
+            tiempo/pow(n, cota+0.2), tiempo/pow(n, 1.0));
         } else
-            printf("%15d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
-                                                                pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
+            printf("%15d%15.3f%15.6f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            pow(n, cota-0.2), tiempo/pow(n, cota),
+            tiempo/pow(n, cota+0.2), tiempo/pow(n, 1.0));
         asterisco = 0;
     }
 }
