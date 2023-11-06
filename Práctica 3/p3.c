@@ -49,9 +49,9 @@ void crearMonticulo(int v[], int n, pmonticulo m) {
     m->ultimo = n - 1;
 
     if (n % 2 == 0) {
-        i = n / 2;
+        i = (n - 1) / 2;
     } else {
-        i = n / 2-1;
+        i = (n - 1) / 2;
     }
     while (i >= 0) {
         hundir(m, i);
@@ -271,7 +271,7 @@ int main() {
     inicializar_semilla();
     const char *inicializacion[] = {"aleatorio", "descendente", "ascendente"};
     int v[9], n = 9;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
         test(v, n, inicializacion[i], i);
     }
 
