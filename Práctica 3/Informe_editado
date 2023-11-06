@@ -47,86 +47,32 @@ ha decidido realizar 1000 iteraciones y calculado su promedio.
 
 Tiempos de ejecución (crear, aleatorio)
 
-         Tamaño           t(n)  (t(n)/n^0.82)  (t(n)/n^1.02)  (t(n)/n^1.22)
-(*)        4000         55.774       0.062050       0.011812       0.002249
-(*)        8000        114.466       0.072134       0.011954       0.001981
-(*)       16000        226.744       0.080939       0.011677       0.001685
-(*)       32000        433.440       0.087641       0.011007       0.001382
-          64000        927.000       0.106173       0.011609       0.001269
-         128000       1847.000       0.119827       0.011405       0.001086
-         256000       3769.000       0.138506       0.011477       0.000951
+         Tamaño           t(n)   (t(n)/n^0.8)     (t(n)/n^1)   (t(n)/n^1.2)
+(*)        4000         60.933       0.080021       0.015233       0.002900
+(*)        8000        121.548       0.091680       0.015194       0.002518
+(*)       16000        235.311       0.101940       0.014707       0.002122
+(*)       32000        469.188       0.116742       0.014662       0.001841
+          64000        959.000       0.137049       0.014984       0.001638
+         128000       1940.000       0.159233       0.015156       0.001443
+         256000       4002.000       0.188662       0.015633       0.001295
 
 (*) -> Tiempo medio para 1000 iteraciones
 
-Cota subestimada: n^0.82
-Cota ajustada: n^1.02
-Cota sobrestimada: n^1.22
+Cota subestimada: n^0.8
+Cota ajustada: n^1.0
+Cota sobrestimada: n^1.2
 
 
 Los valores de dividir el tiempo entre la cota subestimada tienden 
 a infinito a medida que aumenta n.
 
 Los valores de dividir el tiempo entre la cota ajustada tienden a 
-la constante '0.011'.
+la constante '0.015'.
 
 Los valores de dividir el tiempo entre la cota sobrestimada tienden a 0 
 a medida que aumenta n.
 
 
-Tiempos de ejecución (crear, descendente)
-
-         Tamaño           t(n)  (t(n)/n^0.82)  (t(n)/n^1.02)  (t(n)/n^1.22)
-(*)        4000         32.729       0.036412       0.006932       0.001320
-(*)        8000         65.918       0.041540       0.006884       0.001141
-(*)       16000        133.080       0.047504       0.006853       0.000989
-(*)       32000        265.798       0.053744       0.006750       0.000848
-          64000        557.000       0.063795       0.006975       0.000763
-         128000       1127.000       0.073116       0.006959       0.000662
-         256000       2298.000       0.084449       0.006998       0.000580
-
-(*) -> Tiempo medio para 1000 iteraciones
-
-Cota subestimada: n^0.82
-Cota ajustada: n^1.02
-Cota sobrestimada: n^1.22
-
-
-Los valores de dividir el tiempo entre la cota subestimada tienden 
-a infinito a medida que aumenta n.
-
-Los valores de dividir el tiempo entre la cota ajustada tienden a 
-la constante '0.0069'.
-
-Los valores de dividir el tiempo entre la cota sobrestimada tienden a 0 
-a medida que aumenta n.
-
-
-Tiempos de ejecución (crear, ascendente)
-
-         Tamaño           t(n)  (t(n)/n^0.84)  (t(n)/n^1.04)  (t(n)/n^1.24)
-(*)        4000         15.198       0.014324       0.002727       0.000519
-(*)        8000         31.110       0.016380       0.002714       0.000450
-(*)       16000         61.094       0.017970       0.002592       0.000374
-(*)       32000        120.168       0.019745       0.002480       0.000311
-(*)       64000        241.484       0.022167       0.002424       0.000265
-         128000        562.000       0.028819       0.002743       0.000261
-         256000       1157.000       0.033145       0.002746       0.000228
-
-(*) -> Tiempo medio para 1000 iteraciones
-
-Cota subestimada: n^0.84
-Cota ajustada: n^1.04
-Cota sobrestimada: n^1.24
-
-
-Los valores de dividir el tiempo entre la cota subestimada tienden 
-a infinito a medida que aumenta n.
-
-Los valores de dividir el tiempo entre la cota ajustada tienden a 
-la constante '0.0027'.
-
-Los valores de dividir el tiempo entre la cota sobrestimada tienden a 0 
-a medida que aumenta n.
 
 -------Ordenación por montículos-------
 
