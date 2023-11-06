@@ -172,9 +172,15 @@ void comprueba(const char* nombreFunc, const char* ordenacion){
             printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
                    "(t(n)/n^0.88)", "(t(n)/n^1.08)", "(t(n)/n^1.28)");
         }
-    } else
-        printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-               "(t(n)/n^0.82)", "(t(n)/n^1.02)", "(t(n)/n^1.22)");
+    } else {
+        if (strcmp(ordenacion, "ascendente") == 0) {
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.84)", "(t(n)/n^1.04)", "(t(n)/n^1.24)");
+    } else {
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.82)", "(t(n)/n^1.02)", "(t(n)/n^1.22)");
+        }
+    }
 }
 
 void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
@@ -271,7 +277,7 @@ int main() {
     for (int i = 0; i < 2; i++)
         tablaTiempos_crear(crearMonticulo, descendente, "crear", "descendente", 1.02);
     for (int i = 0; i < 2; i++)
-        tablaTiempos_crear(crearMonticulo, ascendente, "crear", "ascendente", 1.02);
+        tablaTiempos_crear(crearMonticulo, ascendente, "crear", "ascendente", 1.04);
     for (int i = 0; i < 2; i++)
         tablaTiempos(ordenarPorMonticulos, aleatorio, "monticulo", "aleatorio", 1.1);
     for (int i = 0; i < 2; i++)
