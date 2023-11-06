@@ -262,20 +262,20 @@ int main() {
     inicializar_semilla();
     const char *inicializacion[] = {"aleatorio", "descendente", "ascendente"};
     int v[9], n = 9;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
         test(v, n, inicializacion[i], i);
     }
 
-    /*for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
         tablaTiempos_crear(crearMonticulo, aleatorio, "crear", "aleatorio", 1.02);
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
         tablaTiempos_crear(crearMonticulo, descendente, "crear", "descendente", 1.02);
-    for (int i = 0; i < 5; i++)
-        tablaTiempos_crear(crearMonticulo, ascendente, "crear", "ascendente", 1.02);*/
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
+        tablaTiempos_crear(crearMonticulo, ascendente, "crear", "ascendente", 1.02);
+    for (int i = 0; i < 2; i++)
         tablaTiempos(ordenarPorMonticulos, aleatorio, "monticulo", "aleatorio", 1.1);
-    /*for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
         tablaTiempos(ordenarPorMonticulos, descendente, "monticulo", "descendente", 1.08);
-    for (int i = 0; i < 5; i++)
-        tablaTiempos(ordenarPorMonticulos, ascendente, "monticulo", "ascendente", 1.08);*/
+    for (int i = 0; i < 2; i++)
+        tablaTiempos(ordenarPorMonticulos, ascendente, "monticulo", "ascendente", 1.08);
 }
