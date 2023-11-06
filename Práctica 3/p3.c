@@ -43,21 +43,23 @@ void hundir(pmonticulo m, int i) {
 }
 
 void crearMonticulo(int v[], int n, pmonticulo m) {
-    int i;
+    int i, j;
 
-    memcpy(m->vector, v, n*sizeof(int));
+    for (j = 0; j < n; j++) {
+        m->vector[j] = v[j];
+    }
+
     m->ultimo = n - 1;
 
     if (n % 2 == 0) {
-        i = (n - 1) / 2;
+        i = (m->ultimo - 1) / 2;
     } else {
-        i = (n - 1) / 2;
+        i = (m->ultimo - 1) / 2;
     }
     while (i >= 0) {
         hundir(m, i);
         i--;
     }
-    //listar_vector(m->vector, n);
 }
 
 int quitarMenor(pmonticulo m) {
@@ -162,7 +164,7 @@ void test(int v[], int n, const char *tipo_inicializacion, int iteracion) {
     }
 }
 
-void comprueba(const char* nombreFunc, const char* ordenacion){
+void comprueba(const char* nombreFunc, const char* ordenacion) {
     printf("\nTiempos de ejecución (%s, %s)\n\n", nombreFunc, ordenacion);
     if (strcmp(nombreFunc, "monticulo") == 0) {
         if (strcmp(ordenacion, "aleatorio") == 0) {
@@ -173,15 +175,8 @@ void comprueba(const char* nombreFunc, const char* ordenacion){
                    "(t(n)/n^0.88)", "(t(n)/n^1.08)", "(t(n)/n^1.28)");
         }
     } else {
-        if (strcmp(ordenacion, "ascendente") == 0) {
-            printf("%16s%15s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.84)", "(t(n)/n^1.04)",
-                   "(t(n)/n^1.24)", "(t(n)/n^1)");
-    } else {
-            printf("%16s%15s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.82)", "(t(n)/n^1.02)",
-                   "(t(n)/n^1.22)", "(t(n)/n^1)");
-        }
+            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+                   "(t(n)/n^0.8)", "(t(n)/n^1)", "(t(n)/n^1.2)");
     }
 }
 
@@ -230,7 +225,7 @@ void tablaTiempos_crear(void (*func)(int[], int, pmonticulo), void (*ord)(int[],
     int t[] = {4000, 8000, 16000, 32000, 64000, 128000, 256000};
     int k = 1000, n, v[256000], asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
-    pmonticulo m = malloc(sizeof(struct monticulo));;
+    pmonticulo m = malloc(sizeof(struct monticulo));
     comprueba(nombreFunc, ordenacion);
     for (i = 0; i < 7; i++) {
         n = t[i];
@@ -256,13 +251,11 @@ void tablaTiempos_crear(void (*func)(int[], int, pmonticulo), void (*ord)(int[],
             tiempo = (tiempo1 - tiempo2) / k;
         }
         if (asterisco == 1) {
-            printf("(*)%12d%15.3f%15.6f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
-            pow(n, cota-0.2), tiempo/pow(n, cota),
-            tiempo/pow(n, cota+0.2), tiempo/pow(n, 1.0));
+            printf("(*)%12d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         } else
-            printf("%15d%15.3f%15.6f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
-            pow(n, cota-0.2), tiempo/pow(n, cota),
-            tiempo/pow(n, cota+0.2), tiempo/pow(n, 1.0));
+            printf("%15d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
+            pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         asterisco = 0;
     }
 }
@@ -276,11 +269,7 @@ int main() {
     }
 
     for (int i = 0; i < 2; i++)
-        tablaTiempos_crear(crearMonticulo, aleatorio, "crear", "aleatorio", 1.02);
-    for (int i = 0; i < 2; i++)
-        tablaTiempos_crear(crearMonticulo, descendente, "crear", "descendente", 1.02);
-    for (int i = 0; i < 2; i++)
-        tablaTiempos_crear(crearMonticulo, ascendente, "crear", "ascendente", 1.04);
+        tablaTiempos_crear(crearMonticulo, aleatorio, "crear", "aleatorio", 1.0);
     for (int i = 0; i < 2; i++)
         tablaTiempos(ordenarPorMonticulos, aleatorio, "monticulo", "aleatorio", 1.1);
     for (int i = 0; i < 2; i++)
