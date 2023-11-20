@@ -92,33 +92,6 @@ void inicializar_semilla() {
 /* se establece la semilla de una nueva serie de enteros pseudo-aleatorios */
 }
 
-/*void aleatorio(int v [], int n) {
-    int i, m=2*n+1;
-    for (i=0; i < n; i++)
-        v[i] = (rand() % m) - n;
-    // se generan números pseudoaleatorio entre -n y +n
-}*/
-
-/*void ascendente(int v[], int n) {
-    int i;
-    for (i = 0; i < n; i++)
-        v[i] = i + 1;
-}
-
-void descendente(int v[], int n) {
-    int i;
-    for (i = 0; i < n; i++)
-        v[i] = n - i;
-}
-
-void listar_vector(int v[], int n){
-    int i;
-    printf("[");
-    for (i = 0; i < n; i++)
-        printf(" %2d", v[i]);
-    printf(" ]\n");
-}*/
-
 void listar_matriz(matriz m, int n){
     int i, j;
     printf(" -");
@@ -138,15 +111,6 @@ void listar_matriz(matriz m, int n){
         printf("---");
     printf("\n\n");
 }
-
-/*bool ordenado (int v[], int n) {
-    int i;
-    for (i = 1; i < n; i++) {
-        if (v[i] < v[i-1])
-            return false;
-    }
-    return true;
-}*/
 
 void test() {
     int i, j;
@@ -182,48 +146,38 @@ void test() {
     liberarMatriz(m2, 4);
 }
 
-/*void comprueba(const char* nombreFunc, const char* ordenacion) {
-    printf("\nTiempos de ejecución (%s, %s)\n\n", nombreFunc, ordenacion);
-    if (strcmp(nombreFunc, "monticulo") == 0) {
-        if (strcmp(ordenacion, "aleatorio") == 0) {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.9)", "(t(n)/n^1.1)", "(t(n)/n^1.3)");
-        } else {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.88)", "(t(n)/n^1.08)", "(t(n)/n^1.28)");
-        }
-    } else {
-            printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-                   "(t(n)/n^0.8)", "(t(n)/n^1)", "(t(n)/n^1.2)");
-    }
+void cabecera() {
+    printf("\nTiempos de ejecución (dijkstra, aleatorio)\n\n");
+    printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
+           "(t(n)/n^2.65)", "(t(n)/n^2.85)", "(t(n)/n^3.05)");
 }
-
-void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
-                  const char* nombreFunc, const char* ordenacion, float cota){
-    int t[] = {4000, 8000, 16000, 32000, 64000, 128000, 256000};
-    int k = 1000, n, v[256000], asterisco = 0, i, j, l;
+void tablaTiempos(){
+    int t[] = {10, 20, 40, 80, 160, 320, 640};
+    int k = 1000, n, asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
-
-    comprueba(nombreFunc, ordenacion);
+    float cota = 2.85;
+    matriz m;
+    cabecera();
     for (i = 0; i < 7; i++) {
         n = t[i];
-        ord(v, n);
+        m = crearMatriz(n);
+        iniMatriz(m, n);
         inicio = microsegundos();
-        func(v, n);
+        dijkstra(m, m, n);
         fin = microsegundos();
         tiempo = fin - inicio;
         if (tiempo < 500) {
             asterisco = 1;
             inicio = microsegundos();
             for (j = 0; j < k; j++) {
-                ord(v, n);
-                func(v, n);
+                iniMatriz(m, n);
+                dijkstra(m, m, n);
             }
             fin = microsegundos();
             tiempo1 = fin - inicio;
             inicio = microsegundos();
             for (l = 0; l < k; l++)
-                ord(v, n);
+                iniMatriz(m, n);
             fin = microsegundos();
             tiempo2 = fin - inicio;
             tiempo = (tiempo1 - tiempo2) / k;
@@ -235,14 +189,15 @@ void tablaTiempos(void (*func)(int[], int), void (*ord)(int[], int),
             printf("%15d%15.3f%15.6f%15.6f%15.6f\n", n, tiempo, tiempo/
             pow(n, cota-0.2), tiempo/pow(n, cota), tiempo/pow(n, cota+0.2));
         asterisco = 0;
+        liberarMatriz(m, n);
     }
-}*/
+}
 
 int main() {
-    //inicializar_semilla();
+    inicializar_semilla();
     test();
 
-    /*for (int i = 0; i < 2; i++)
-        tablaTiempos(crearMonticulo, aleatorio, "crear", "aleatorio", 1.0);*/
+    for (int i = 0; i < 3; i++)
+        tablaTiempos();
 
 }
