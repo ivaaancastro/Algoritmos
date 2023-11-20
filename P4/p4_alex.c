@@ -197,7 +197,7 @@ int main() {
     inicializar_semilla();
     test();
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
         tablaTiempos();
 
 }
