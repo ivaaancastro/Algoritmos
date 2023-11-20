@@ -40,7 +40,7 @@ sobrestimada.
 
 También es importante destacar que para el correcto estudio del algoritmo
 se ha decidido que para aquellas mediciones de menos de 500 µs se ha 
-decidido realizar 1000 iteraciones y calculado su promedio.
+decidido realizar 200 iteraciones y calculado su promedio.
 
 Tiempos de ejecución (dijkstra, aleatorio)
 
