@@ -53,7 +53,7 @@ Tiempos de ejecución (dijkstra, aleatorio)
             320     203903.000       0.041752       0.013172       0.004155
             640    1620202.000       0.052128       0.014316       0.003932
 
-(*) -> Tiempo medio para 1000 iteraciones
+(*) -> Tiempo medio para 200 iteraciones
 
 Cota subestimada: n^2.67
 Cota ajustada: n^2.87
