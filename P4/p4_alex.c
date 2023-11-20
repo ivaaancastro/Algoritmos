@@ -149,13 +149,13 @@ void test() {
 void cabecera() {
     printf("\nTiempos de ejecución (dijkstra, aleatorio)\n\n");
     printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
-           "(t(n)/n^2.65)", "(t(n)/n^2.85)", "(t(n)/n^3.05)");
+           "(t(n)/n^2.67)", "(t(n)/n^2.87)", "(t(n)/n^3.07)");
 }
 void tablaTiempos(){
     int t[] = {10, 20, 40, 80, 160, 320, 640};
     int k = 1000, n, asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
-    float cota = 2.85;
+    float cota = 2.87;
     matriz m;
     cabecera();
     for (i = 0; i < 7; i++) {
@@ -197,7 +197,7 @@ int main() {
     inicializar_semilla();
     test();
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 5; i++)
         tablaTiempos();
 
 }
