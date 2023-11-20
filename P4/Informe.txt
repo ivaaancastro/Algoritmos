@@ -79,7 +79,7 @@ Esto no es lo esperado teoricamente pues esta implementación es una
 generalización del algoritmo que debería dar O(n^3). Pero obtenemos una
 complejidad ligeramente inferior, posiblemente por la limitación del peso
 de las aristas a 1000 provocando así que la complejidad sea ligeramente 
-inferior a la esperada.Debemos señalar que a pesar de que el algoritmo
+inferior a la esperada. Debemos señalar que a pesar de que el algoritmo
 aparentemente tiende a una cota de 0.014 no podemos llegar a asegurar un 
-número exacto, pues paralas entradas de 80, 160 y 320 se aprecia como baja 
+número exacto, pues para las entradas de 80, 160 y 320 se aprecia como baja 
 el valor para posteriormente estabilizarse en 0.014.
