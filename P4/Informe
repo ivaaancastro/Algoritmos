@@ -74,7 +74,7 @@ Conclusiones
 --------------
 
 Tras estudiar la complejidad del algoritmo de Dijkstra, hemos llegado a
-determinar que el analisis empírico de la complejidad es de O(n^2.67).
+determinar que el analisis empírico de la complejidad es de O(n^2.87).
 Debemos señalar que a pesar de que el algoritmo aparentemente tiende a 
 una cota de 0.014 no podemos llegar a asegurar un número exacto, pues para
 las entradas de 80, 160 y 320 se aprecia como baja el valor para 
