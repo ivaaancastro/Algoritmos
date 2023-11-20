@@ -63,7 +63,8 @@ void dijkstra(matriz grafo, matriz distancias, int tam) {
         for (iteracion = 0; iteracion < tam - 2; iteracion++) {
             min = -1;
             for (v = 0; v < tam; v++) {
-                if (noVisitados[v] && (min == -1 || distancias[n][v] < distancias[n][min])) {
+                if (noVisitados[v] && (min == -1 ||
+                    distancias[n][v] < distancias[n][min])) {
                     min = v;
                 }
             }
@@ -71,7 +72,8 @@ void dijkstra(matriz grafo, matriz distancias, int tam) {
             noVisitados[min] = 0;
 
             for (j = 0; j < tam; j++) {
-                if (noVisitados[j] && distancias[n][j] > distancias[n][min] + grafo[min][j]) {
+                if (noVisitados[j] && distancias[n][j] >
+                    distancias[n][min] + grafo[min][j]) {
                     distancias[n][j] = distancias[n][min] + grafo[min][j];
                 }
             }
@@ -151,9 +153,9 @@ void cabecera() {
     printf("%16s%15s%15s%15s%15s\n", "Tamaño", "t(n)",
            "(t(n)/n^2.67)", "(t(n)/n^2.87)", "(t(n)/n^3.07)");
 }
-void tablaTiempos(){
+void tablaTiempos() {
     int t[] = {10, 20, 40, 80, 160, 320, 640};
-    int k = 1000, n, asterisco = 0, i, j, l;
+    int k = 200, n, asterisco = 0, i, j, l;
     double inicio, fin, tiempo1, tiempo2, tiempo;
     float cota = 2.87;
     matriz m;
