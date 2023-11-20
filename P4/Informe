@@ -1,0 +1,81 @@
+PRÁCTICA 3: "ORDENACIÓN POR MONTÍCULOS"
+AUTOR: Iván Castro Roel                 LOGIN: ivan.castro.roel
+AUTOR: Alejandro Amado Fernández        LOGIN: alejandro.amado
+AUTOR: Leandro Malo Balboa              LOGIN: leandro.mbalboa
+GRUPO: 4.3
+FECHA: 02/11/2023	
+
+Práctica realizada en:
+-Ordenador portátil:
+ SO: Ubuntu 22.04.3 LTS
+ CPU: Intel core i7-9750h            2.60 GHz
+ RAM: 32GB
+ GPU: NVIDIA GeForce RTX 2060
+
+Esta practica tiene como objetivo analizar los tiempos de ejecución
+del algoritmo de Dijkstra. Dicho algoritmo se emplea para calcular el
+camino mínimo de cada vértice de un grafo dado. El analisis de los 
+resultados se ha realizado mediante una comprobación empírica de la
+complejidad.
+
+Todas las mediciones presentes en este informe han sido realizadas en 
+microsegundos (µs). Para ello nos hemos apoyado en la función microsegundos().
+
+Para un correcto estudio de los tiempos de ejecución de dicho algoritmo
+hemos empleado matrices cuya dimensión sigue una progresión geométrica de 
+razón 2. Los tamaños  de entrada empleados en el estudio serán
+10, 20, 40, 80, 160, 320 y 640. 
+
+
+
+---------------------
+Tablas de Resultados
+---------------------
+
+A continuación mostreremos una tabla con los resultados obtenidos en 
+nuestro estudio para la ejecución del algoritmo, en dichas tablas se 
+mostrará la siguiente información: El tamaño de la matriz empleada(n),
+el tiempo medio de ejecución (t(n)), la cota subestimada, ajustada y 
+sobrestimada.
+
+También es importante destacar que para el correcto estudio del algoritmo
+se ha decidido que para aquellas mediciones de menos de 500 µs se ha 
+decidido realizar 1000 iteraciones y calculado su promedio.
+
+Tiempos de ejecución (dijkstra, aleatorio)
+
+         Tamaño           t(n)  (t(n)/n^2.67)  (t(n)/n^2.87)  (t(n)/n^3.07)
+(*)          10         10.808       0.023107       0.014580       0.009199
+(*)          20         77.583       0.026063       0.014316       0.007863
+             40        562.000       0.029664       0.014185       0.006783
+             80       3636.000       0.030156       0.012553       0.005226
+            160      26857.000       0.034999       0.012683       0.004596
+            320     203903.000       0.041752       0.013172       0.004155
+            640    1620202.000       0.052128       0.014316       0.003932
+
+(*) -> Tiempo medio para 1000 iteraciones
+
+Cota subestimada: n^2.67
+Cota ajustada: n^2.87
+Cota sobrestimada: n^3.07
+
+Los valores de dividir el tiempo entre la cota subestimada tienden 
+a infinito a medida que aumenta n.
+
+Los valores de dividir el tiempo entre la cota ajustada tienden a 
+una constante entre '0.013' y '0.014'.
+
+Los valores de dividir el tiempo entre la cota sobrestimada tienden a 0 
+a medida que aumenta n.
+
+
+--------------
+Conclusiones
+--------------
+
+Tras estudiar la complejidad del algoritmo de Dijkstra, hemos llegado a
+determinar que el analisis empírico de la complejidad es de O(n^2.67).
+Debemos señalar que a pesar de que el algoritmo aparentemente tiende a 
+una cota de 0.014 no podemos llegar a asegurar un número exacto, pues para
+las entradas de 80, 160 y 320 se aprecia como baja el valor para 
+posteriormente estabilizarse en 0.014.
